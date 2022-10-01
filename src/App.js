@@ -1,25 +1,50 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { useState } from "react";
+import { Button, ButtonGroup, Dropdown } from "react-bootstrap";
+
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [theme, setTheme] = useState(null);
+
+	const resetTheme = () => {
+		setTheme(null);
+	};
+
+	return (
+		<div className="App">
+			<div className="m-2">
+				<Dropdown as={ButtonGroup} size="lg">
+					<Button
+						className="text-capitalize"
+						variant={theme ? theme : "secondary"}
+					>
+						{theme ? theme : "Default"}
+					</Button>
+					<Dropdown.Toggle
+						split
+						variant={theme ? theme : "secondary"}
+						id="dropdown-split-basic"
+					/>
+					<Dropdown.Menu>
+						<Dropdown.Item eventKey="1" onClick={() => setTheme("primary")}>
+							Primary
+						</Dropdown.Item>
+						<Dropdown.Item eventKey="2" onClick={() => setTheme("danger")}>
+							Danger
+						</Dropdown.Item>
+						<Dropdown.Item eventKey="3" onClick={() => setTheme("success")}>
+							Success
+						</Dropdown.Item>
+						<Dropdown.Divider />
+						<Dropdown.Item eventKey="4" onClick={resetTheme}>
+							Default Theme
+						</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+			</div>
+		</div>
+	);
 }
 
 export default App;
