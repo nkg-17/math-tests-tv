@@ -18,7 +18,6 @@ class App extends React.Component {
 					<Routes>
 						<Route path="/" element={<Navigate to="/catalog" />} />
 						<Route path="/test" element={<Test />} />
-						<Route path="/test/:id" element={<Test />} />
 						<Route path="/catalog" element={<Catalog />} />
 					</Routes>
 				</BrowserRouter>
