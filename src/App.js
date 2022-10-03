@@ -1,29 +1,25 @@
+
 import './App.css';
 
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Catalog from './components/Catalog';
-import Test from './components/Test';
-import MyNavbar from './components/MyNavbar';
+import Catalog from './pages/Catalog';
+import Test from 	'./pages/Test';
+import Header from 	'./components/Header';
 
 
-class App extends React.Component {
-	render() {
-		return (
-			<div className="App">
-				<MyNavbar />
-
-				<BrowserRouter basename={process.env.PUBLIC_URL}>
-					<Routes>
-						<Route path="/" element={<Navigate to="/catalog" />} />
-						<Route path="/test" element={<Test />} />
-						<Route path="/catalog" element={<Catalog />} />
-					</Routes>
-				</BrowserRouter>
-			</div>
-		);
-	}
+export default function App() {
+	return (
+		<div className="App">
+			<Router>
+				<Header />
+				
+				<Routes>
+					<Route exact path="/" element={ <Catalog /> } />
+					<Route exact path="/test/<:id>" element={ <Test /> } />
+				</Routes>
+			</Router>
+		</div>
+	);
 }
-
-export default App;
