@@ -4,8 +4,8 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Catalog from './pages/Catalog';
-import Test from 	'./pages/Test';
+import CatalogPage from './pages/CatalogPage';
+import TestPage from 	'./pages/TestPage';
 import Header from 	'./components/Header';
 
 
@@ -16,8 +16,8 @@ export default function App() {
 				<Header />
 				
 				<Routes>
-					<Route exact path="/" element={ <Catalog /> } />
-					<Route exact path="/test/<:id>" element={ <Test /> } />
+					<Route exact path="/" element={ <CatalogPage /> } />
+					<Route path="/test" element={ <TestPage /> } />
 				</Routes>
 			</Router>
 		</div>
