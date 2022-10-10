@@ -17,7 +17,7 @@ export default function App() {
 				
 				<Routes>
 					<Route exact path="/" element={ <CatalogPage /> } />
-					<Route path="/test" element={ <TestPage /> } />
+					<Route path="/test/:id" element={ <TestPage /> } />
 				</Routes>
 			</Router>
 		</div>

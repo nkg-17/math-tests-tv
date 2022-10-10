@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Container,
 	InputGroup,
@@ -7,10 +7,14 @@ import {
 	Row,
 	Col
 } from 'react-bootstrap';
-import TestCard from '../components/TestCard';
-
+import TestPreviewCard from '../components/TestPreviewCard';
+import TestsAPI from '../api/TestsAPI';
 
 export default function CatalogPage() {
+	const [ previewList, setPreviewList ] = useState([]);
+	if (previewList.length === 0)
+		TestsAPI.requestPreviewList().then((list) => { setPreviewList(list); } );
+
 	return (
 		<Container className="mt-3">
 			<Row className="justify-content-start">
@@ -19,20 +23,24 @@ export default function CatalogPage() {
 						<InputGroup.Text>
 							<i className="bi bi-search"/>
 						</InputGroup.Text>
-						<Form.Control placeholder="Поиск"/>
+						<Form.Control id="search-bar" placeholder="Поиск" onInput={(e) => {}}/>
 					</InputGroup>
 				</Col>
 			</Row>
 
 			<Container fluid className="mt-3 mb-5 px-4">
 				<Row className="gx-5 gy-4">
-					<Col lg={3} md={4} sm={6} xs={12} className="d-flex flex-row justify-content-center"><TestCard title="Title Title Title Title Title Title" text="Sample text Sample text Sample text Sample text Sample text Sample text"/></Col>
-					<Col lg={3} md={4} sm={6} xs={12} className="d-flex flex-row justify-content-center"><TestCard title="Title" text="Sample text Sample text Sample text Sample text Sample text Sample text"/></Col>
-					<Col lg={3} md={4} sm={6} xs={12} className="d-flex flex-row justify-content-center"><TestCard title="Title" text="Sample text"/></Col>
-					<Col lg={3} md={4} sm={6} xs={12} className="d-flex flex-row justify-content-center"><TestCard title="Title" text="Sample text Sample text Sample text Sample text Sample text Sample text"/></Col>
-					<Col lg={3} md={4} sm={6} xs={12} className="d-flex flex-row justify-content-center"><TestCard title="Title" text="Sample text"/></Col>
-					<Col lg={3} md={4} sm={6} xs={12} className="d-flex flex-row justify-content-center"><TestCard title="Title" text="Sample text"/></Col>
-					<Col lg={3} md={4} sm={6} xs={12} className="d-flex flex-row justify-content-center"><TestCard title="Title" text="Sample text"/></Col>
+					{
+						previewList.map((preview) => {
+							return (
+								<Col key={preview.id}
+								lg={3} md={4} sm={6} xs={12} 
+								className="d-flex flex-row justify-content-center">
+								<TestPreviewCard data={preview} />
+								</Col>
+							);
+						})
+					}
 				</Row>
 			</Container>
 		</Container>
