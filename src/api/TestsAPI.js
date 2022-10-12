@@ -1,5 +1,5 @@
 
-const Tests = require('./tests.json');
+let Tests = require('./tests.json');
 
 
 export default class TestsAPI {

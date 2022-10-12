@@ -7,7 +7,8 @@ import {
 	Container,
 	Row,
 	Col,
-	Button
+	Button,
+	Alert
 } from 'react-bootstrap';
 import TestsAPI from '../api/TestsAPI';
 
@@ -57,7 +58,14 @@ export default function TestPage(props) {
 	} else {
 		return (
 			<Container className="TestPage py-3">
-				<h2>Test "{params.id}" was not found</h2>
+				<Alert variant="danger">
+					<Alert.Heading>Тест под номером {params.id} не существует!</Alert.Heading>
+					{ /*<p>
+					</p>
+					<hr />
+					<p>
+					</p> */ }
+				</Alert>
 			</Container>
 		);
 	}
