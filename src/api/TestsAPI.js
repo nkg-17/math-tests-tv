@@ -28,20 +28,15 @@ export default class TestsAPI {
 		});
 	}
 
-	static requestPreviewList(filter = null) {
+	static requestTestList(filter = null) {
 		return new Promise(function (resolve, reject) {
-			let previewList = [];
-			for (let id in Tests) {
-				let preview = { 
-					id: id,
-					name: Tests[id].name,
-					text: Tests[id].problem.preface,
-					tags: Tests[id].tags,
-					pictureUrl: Tests[id].problem.pictureUrl
-				};
-				previewList.push(preview);
-			}
-			resolve(previewList);
+			let array = [];
+			for (let id in Tests)
+				array.push(Tests[id]);
+			resolve(array);
 		});
 	}
+
+	static requestStarredTests() {}
+	static requestTagList() {}
 }

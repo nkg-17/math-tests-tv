@@ -3,6 +3,7 @@
 		"name": "Test 11375",
 		"id": 11375,
 		"tags": [ "tag1", "tag2" ],
+		"starred": true,
 		"problem": {
 			"preface": "Цилиндр и конус имеют общие основание и высоту. Объём конуса равен 25. Найдите объём цилиндра.",
 			"tasks": [
@@ -24,6 +25,7 @@
 		"name": "Test 77233",
 		"id": 77233,
 		"tags": [ "tag4", "tag2" ],
+		"starred": false,
 		"problem": {
 			"preface": "Problem preface",
 			"tasks": [
@@ -45,6 +47,7 @@
 		"name": "Test 83908",
 		"id": 83908,
 		"tags": [ "tag0", "tag9" ],
+		"starred": false,
 		"problem": {
 			"preface": "Problem preface",
 			"tasks": [
@@ -66,6 +69,7 @@
 		"name": "Test 15151",
 		"id": 15151,
 		"tags": [ "tag3" ],
+		"starred": true,
 		"problem": {
 			"preface": "Problem preface",
 			"tasks": [
@@ -87,6 +91,7 @@
 		"name": "Test 64839",
 		"id": 64839,
 		"tags": [],
+		"starred": false,
 		"problem": {
 			"preface": "Problem preface",
 			"tasks": [

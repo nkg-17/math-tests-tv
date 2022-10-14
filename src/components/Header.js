@@ -1,8 +1,7 @@
-
 import React from 'react';
 
 import { LinkContainer } from 'react-router-bootstrap';
-import { Container, Navbar, Nav, NavDropdown,  /* Button */ } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 
 
 export default function Header(props) {
@@ -31,6 +30,10 @@ export default function Header(props) {
 							</NavDropdown>
 						</Nav>
 					</Navbar.Collapse>
+
+					<Button variant="light">
+						<i className="bi bi-moon" />
+					</Button>
 			</Container>
 		</Navbar>
 		</>

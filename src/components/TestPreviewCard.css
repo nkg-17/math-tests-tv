@@ -27,18 +27,26 @@
 .TestPreviewCardTitle {
 	color: rgba(0, 0, 0, 1.0);
 	max-height: 1.5rem;
-	overflow-x: hidden;
+	/* overflow-x: hidden; */
 	background-color: transparent;
 }
 
 .TestPreviewCardText {
-	height: 5rem;
-	max-height: 5rem;
+	height: 6rem;
+	max-height: 6rem;
 
 	color: rgba(0, 0, 0, 0.75);
 	overflow: hidden;
 
 	background-color: transparent;
+}
+
+.TestPreviewCardStar {
+	position: absolute;
+	right: 0.5rem;
+
+	font-size: 1.5rem;
+	color: gold;
 }
 
 .text-dec-none {

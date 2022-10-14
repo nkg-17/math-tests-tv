@@ -1,3 +1,4 @@
+import './dropdown.css';
 
 import React, { useState } from 'react';
 import { Dropdown, Button } from 'react-bootstrap';
@@ -16,7 +17,7 @@ const CustomToggle = React.forwardRef(({ children, onClick, theme }, ref) => {
 			e.preventDefault();
 			onClick(e);
 		}}>
-			<i className="bi bi-list-ul me-2" style={{ color: CustomToggleThemeMap[theme].color }}></i>
+			<i className="bi bi-list me-2" style={{ color: CustomToggleThemeMap[theme].color }}></i>
 			{children}
 		</Button>
 	);
@@ -48,7 +49,7 @@ export default function NamedDropdown(props) {
 			<Dropdown.Toggle as={CustomToggle} theme={theme}>
 				{ (choosedItem !== null) ? choosedItem.title : props.title }
 			</Dropdown.Toggle>
-			<Dropdown.Menu variant={themeMap[theme].menu}>
+			<Dropdown.Menu variant={themeMap[theme].menu} className="dropdown-animated-menu">
 				{ itemArray.map((i) => {
 					return (<Dropdown.Item as="button" eventKey={i.id} key={i.id}>{i.text}</Dropdown.Item>);
 				}) }
