@@ -24,7 +24,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -b gh-pages -f -m \"deploy to gh-pages\""
+    "deploy": "gh-pages -d build -b gh-pages -f -m \"deploy to gh-pages\"",
+    "postdeploy": "echo Deployed to https://nkg-17.github.io/math-tests"
   },
   "eslintConfig": {
     "extends": [

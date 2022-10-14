@@ -29,11 +29,12 @@ export default function Header(props) {
 								<NavDropdown.Item href="#">Репозиторий проекта</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
+						
+						<Button variant="light">
+							<i className="bi bi-moon" />
+						</Button>
 					</Navbar.Collapse>
 
-					<Button variant="light">
-						<i className="bi bi-moon" />
-					</Button>
 			</Container>
 		</Navbar>
 		</>
