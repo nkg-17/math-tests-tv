@@ -26,8 +26,8 @@
 
 .TestPreviewCardTitle {
 	color: rgba(0, 0, 0, 1.0);
-	max-height: 1.5rem;
-	/* overflow-x: hidden; */
+	max-height: 1.7rem;
+	overflow: hidden;
 	background-color: transparent;
 }
 

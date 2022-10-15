@@ -1,5 +1,3 @@
-import './dropdown.css';
-
 import React, { useState } from 'react';
 import { Dropdown, Button } from 'react-bootstrap';
 
@@ -49,7 +47,7 @@ export default function NamedDropdown(props) {
 			<Dropdown.Toggle as={CustomToggle} theme={theme}>
 				{ (choosedItem !== null) ? choosedItem.title : props.title }
 			</Dropdown.Toggle>
-			<Dropdown.Menu variant={themeMap[theme].menu} className="dropdown-animated-menu">
+			<Dropdown.Menu variant={themeMap[theme].menu}>
 				{ itemArray.map((i) => {
 					return (<Dropdown.Item as="button" eventKey={i.id} key={i.id}>{i.text}</Dropdown.Item>);
 				}) }

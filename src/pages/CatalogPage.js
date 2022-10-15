@@ -39,20 +39,12 @@ export default function CatalogPage() {
 				</Col>
 			</Row>
 			<Row className="mt-2 gy-2 justify-content-center">
-				<Col className="col d-flex flex-row-reverse">
+				<Col className="col">
 					<NamedDropdown 
 					changeTitle={true}
 					theme="light"
 					title="Тип задач" 
 					items={{ 0: "Все", 1: "Треугольники", 2: "Объём", 3: "Прямоугольники" }} 
-					onChange={(k, e) => {}} />
-				</Col>
-				<Col className="col d-flex flex-row">
-					<NamedDropdown 
-					changeTitle={true}
-					theme="light"
-					title="Сортировать" 
-					items={{ 0: "За всё время", 1: "Сначала новые", 2: "Сначала старые" }} 
 					onChange={(k, e) => {}} />
 				</Col>
 			</Row>

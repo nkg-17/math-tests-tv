@@ -4,7 +4,16 @@
 
 	background-color: var(--bs-white);
 	border-radius: 5px;
-	/* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px 3px; */
+}
+
+.TestProblemHeader {
+}
+
+.TestProblemBody {
+	height: 87%;
+	max-height: 87%;
+
+	text-align: left;
 }
 
 .TestPicturePanel {
@@ -12,8 +21,6 @@
 
 	background-color: var(--bs-white);
 	border-radius: 5px;
-
-	display: inline-block;
 }
 
 .TestPicture {
