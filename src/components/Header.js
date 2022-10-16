@@ -23,10 +23,10 @@ export default function Header(props) {
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="me-auto">
 							<NavDropdown title="Справка">
-								<NavDropdown.Item href="https://github.com/ts-vadim/math-tests-archive">Редактировать Задачи</NavDropdown.Item>
+								<NavDropdown.Item href="https://github.com/nkg-17/math-tests-archive">Редактировать Задачи</NavDropdown.Item>
 								<NavDropdown.Divider />
-								<NavDropdown.Item href="#">Сообщить об ошибке</NavDropdown.Item>
-								<NavDropdown.Item href="#">Репозиторий проекта</NavDropdown.Item>
+								<NavDropdown.Item href="https://github.com/nkg-17/math-tests/issues/new">Сообщить об ошибке</NavDropdown.Item>
+								<NavDropdown.Item href="https://github.com/nkg-17/math-tests">Репозиторий проекта</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
 						

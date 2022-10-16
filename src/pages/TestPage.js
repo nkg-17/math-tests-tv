@@ -31,7 +31,7 @@ export default function TestPage(props) {
 	});
 	const tabComponents = {
 		0: ProblemTab,
-		1: ErrorTab,
+		1: TipsTab,
 		2: SolutionTab
 	}
 
@@ -39,16 +39,16 @@ export default function TestPage(props) {
 		return (
 			<>
 				<p>{state.testInfo.problem.preface}</p>
-				<ol>
+				
 				{
 					state.testInfo.problem.tasks.map((task, i) => { return (
-						<li key={i}>
-							<b>{task.title}</b>
+						<>
+							<h5>{i+1}. {task.title}</h5>
 							<p>{task.text}</p>
-						</li>
+						</>
 					); })
 				}
-				</ol>
+				
 				{
 					(!state.solutionOpened) ? (
 						<Button variant="outline-success" onClick={openSolution}>Открыть решение</Button>
@@ -61,20 +61,27 @@ export default function TestPage(props) {
 		return (
 			<>
 				<p>{state.testInfo.solution.preface}</p>
-				<ul>
 				{
 					state.testInfo.solution.tasks.map((task, i) => { return (
-						<li key={i}>{task.text}</li>
+						<p>
+							<b>{i+1})</b> {task.text}
+							{
+								(task.answer) ? (
+									<>
+										<br />
+										<b>Ответ:</b> {task.answer}
+									</>
+								) : (<></>)
+							}
+						</p>
 					); })
 				}
-				</ul>
 			</>
 		);
 	}
-	function ErrorTab(index) {
+	function TipsTab(index) {
 		return (
 			<>
-				Tab {index}
 			</>
 		);
 	}
@@ -113,7 +120,7 @@ export default function TestPage(props) {
 				</Row>
 				<Row className="gy-2">
 					<Col md={6} sm={12}>
-						<Container className="TestProblemPanel p-2 border">
+						<Container className="TestProblemPanel p-3 border">
 							<Container fluid className="TestProblemHeader d-flex flex-row justify-content-between">
 								<h2>{state.testInfo.name}</h2>
 								<i className={"bi " + (state.testInfo.starred ? "bi-star-fill" : "")} style={{color: "gold", fontSize: "1.25rem"}} />
