@@ -8,7 +8,8 @@ import {
 	Row,
 	Col,
 	Button,
-	Nav
+	Nav,
+	Spinner
 } from 'react-bootstrap';
 import TestsAPI from '../api/TestsAPI';
 
@@ -37,46 +38,47 @@ export default function TestPage(props) {
 
 	function ProblemTab(index) {
 		return (
-			<>
-				<p>{state.testInfo.problem.preface}</p>
-				
-				{
-					state.testInfo.problem.tasks.map((task, i) => { return (
-						<>
-							<h5>{i+1}. {task.title}</h5>
-							<p>{task.text}</p>
-						</>
-					); })
-				}
+			<div>
+				<div>
+					<p>{state.testInfo.problem.preface}</p>
+					
+					{
+						state.testInfo.problem.tasks.map((task, i) => { return (
+							<div key={i}>
+								<h5>{i+1}. {task.title}</h5>
+								<p>{task.text}</p>
+							</div>
+						); })
+					}
+				</div>
 				
 				{
 					(!state.solutionOpened) ? (
 						<Button variant="outline-success" onClick={openSolution}>Открыть решение</Button>
 					) : (<></>)
 				}
-			</>
+			</div>
 		);
 	}
 	function SolutionTab(index) {
 		return (
-			<>
+			<div>
 				<p>{state.testInfo.solution.preface}</p>
+
 				{
 					state.testInfo.solution.tasks.map((task, i) => { return (
-						<p>
-							<b>{i+1})</b> {task.text}
-							{
-								(task.answer) ? (
+							<p key={i}>
+								<b>{i+1})</b> {task.text}
+								{ (task.answer) ? (
 									<>
 										<br />
 										<b>Ответ:</b> {task.answer}
 									</>
-								) : (<></>)
-							}
-						</p>
+								) : (<></>)}
+							</p>
 					); })
 				}
-			</>
+			</div>
 		);
 	}
 	function TipsTab(index) {
@@ -98,8 +100,16 @@ export default function TestPage(props) {
 		() => {
 			let request = TestsAPI.requestTestInfo(params.id);
 			request.then(
-				(info) => { setState( (state) => { return { ...state, status: Status.Ok, testInfo: info }; } ); },
-				(error) => { setState( (state) => { return { ...state, status: Status.Failed, testInfo: null}; } ); }
+				(info) => {
+					setState((state) => {
+						return { ...state, status: Status.Ok, testInfo: info };
+					});
+				},
+				(error) => {
+					setState((state) => {
+						return { ...state, status: Status.Failed, testInfo: null };
+					});
+				}
 			);
 			return ()=>{};
 		}, [params.id]
@@ -152,7 +162,7 @@ export default function TestPage(props) {
 	} else {
 		return (
 			<Container className="py-3">
-				Loading...
+				<Spinner animation="border" variant="secondary" />
 			</Container>
 		);
 	}

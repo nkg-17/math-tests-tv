@@ -1,4 +1,4 @@
-import { Octokit, App } from "octokit";
+import { Octokit } from "octokit";
 
 
 const OctokitOptions = {
@@ -16,10 +16,15 @@ export default class TestsAPI {
 
 	static requestTestInfo(testId, fetchCache = true) {
 		if (fetchCache && TestsAPI.cache.testList[testId] !== undefined) {
-			console.log('cache hit for ' + testId);
 			return new Promise((resolve, reject) => { resolve(TestsAPI.cache.testList[testId]); });
 		} else {
-			return _requestPath(`tests/${testId}/description.json`).then(async (resp) => {
+			return new Promise(async (resolve, reject) => {
+				let resp = await _requestPath(`tests/${testId}/description.json`);
+				if (!resp) {
+					reject(null);
+					return;
+				}
+
 				// Response to JSON
 				let testInfo = await (await fetch(resp['data']['download_url'])).json();
 
@@ -35,8 +40,8 @@ export default class TestsAPI {
 				}
 
 				TestsAPI.cache.testList[testInfo.id] = testInfo;
-				return testInfo;
-			}).catch((error) => { console.log(`Request failed: ${error}`); });
+				resolve(testInfo);
+			});
 		}
 	}
 
@@ -57,8 +62,17 @@ export default class TestsAPI {
 		}).then((res) => testList);
 	}
 
-	static requestStarredTests() {}
-	static requestTagList() {}
+	static requestStarredTests() {
+		return new Promise((resolve, reject) => {
+			reject("Not implemented");
+		});
+	}
+	
+	static requestTagList() {
+		return new Promise((resolve, reject) => {
+			reject("Not implemented");
+		});
+	}
 }
 
 
@@ -67,7 +81,10 @@ async function _requestPath(path) {
 		owner: 'nkg-17',
 		repo: 'math-tests-archive',
 		path: path
-	});
+	}).then(
+		(resp) => resp,
+		(error) => null
+	);
 }
 
 

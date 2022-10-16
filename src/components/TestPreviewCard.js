@@ -23,7 +23,7 @@ export default function TestPreviewCard(props) {
 						
 						<Row className="justify-content-center">
 							<Col>
-								<Card.Img className="TestPreviewCardImg" src={props.test.problem.pictureUrl} />
+								<Card.Img className="TestPreviewCardImg p-2" src={props.test.problem.pictureUrl} />
 							</Col>
 						</Row>
 						<Card.Body className="h-100">

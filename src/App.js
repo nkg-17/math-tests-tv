@@ -16,13 +16,12 @@ export default function App() {
 		<div className="App">
 			<Router basename={process.env.PUBLIC_URL}>
 				<Header />
-				
-				<Routes>
-					<Route exact path="/" element={ <CatalogPage /> } />
-					<Route exact path="/test/:id" element={ <TestPage /> } />
-					<Route exact path="/404" element={ <ErrorPage /> } />
-					<Route path="*" element={<ErrorPage />} />
- 				</Routes>
+					<Routes>
+						<Route exact path="/" element={ <CatalogPage /> } />
+						<Route exact path="/test/:id" element={ <TestPage /> } />
+						<Route exact path="/404" element={ <ErrorPage /> } />
+						<Route path="*" element={<ErrorPage />} />
+	 				</Routes>
 			</Router>
 		</div>
 	);

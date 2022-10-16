@@ -19,12 +19,12 @@ export default function CatalogPage() {
 
 	useEffect(
 		() => {
-			let req = TestsAPI.requestTestList();
-			req.then((list) => { setTestList(list); } );
-			req.catch((list) => { setTestList(null); } );
+			TestsAPI.requestTestList().then(
+				(list) => { setTestList((state) => { return list; }); },
+				(error) => { setTestList((state) => { return null; }); }
+			);
 			return () => {};
-		},
-		[]
+		}, []
 	);
 
 	return (
