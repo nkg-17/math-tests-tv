@@ -11,15 +11,9 @@ import {
 	Nav,
 	Spinner
 } from 'react-bootstrap';
+
 import TestsAPI from '../api/TestsAPI';
-
-
-class Status {
-	static Ok 		= 0;
-	static Waiting 	= 1;
-	static Failed 	= 2;
-};
-
+import Status from '../common/Status';
 
 
 export default function TestPage(props) {
@@ -142,17 +136,20 @@ export default function TestPage(props) {
 
 						<div className="w-100 py-2 d-flex flex-row justify-content-between">
 							<LinkContainer to={ "/" }><Button variant="light">Вернутся</Button></LinkContainer>
+							{ /*
 							<LinkContainer to={ "/" }><Button variant="light">Следующая задача</Button></LinkContainer>
+							*/ }
 						</div>
 					</Col>
 					<Col md={6} sm={12}>
 						<Container className="TestPicturePanel p-2 border">
 							<img src={state.testInfo.problem.pictureUrl} className="TestPicture" alt="" />
 						</Container>
-
+						{ /*
 						<div className="w-100 py-2 d-flex flex-row-reverse">
 							<LinkContainer to={ "/" }><Button variant="light"><i className="bi bi-fullscreen" /></Button></LinkContainer>
 						</div>
+						*/ }
 					</Col>
 				</Row>
 			</Container>

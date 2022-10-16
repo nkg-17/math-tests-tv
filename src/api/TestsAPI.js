@@ -2,9 +2,7 @@ import { Octokit } from "octokit";
 
 
 const OctokitOptions = {
-	userAgent: "math-tests-app/v1.0.0",
-	onRateLimit: OnHitRateLimit,
-	onSecondaryRateLimit: OnHitRateLimit
+	userAgent: "math-tests-app/v1.0.0"
 };
 const GitHub = new Octokit(OctokitOptions);
 
@@ -19,24 +17,58 @@ export default class TestsAPI {
 			return new Promise((resolve, reject) => { resolve(TestsAPI.cache.testList[testId]); });
 		} else {
 			return new Promise(async (resolve, reject) => {
-				let resp = await _requestPath(`tests/${testId}/description.json`);
-				if (!resp) {
-					reject(null);
+				let resp = null;
+				await _requestPath(`tests/${testId}/description.json`).then(
+					(okResp) => { resp = okResp; },
+					(errResp) => { reject(errResp); },
+				);
+				if (!resp)
 					return;
-				}
 
-				// Response to JSON
-				let testInfo = await (await fetch(resp['data']['download_url'])).json();
+				// Get raw description.json contents
+				let testRawContents = null;
+				await fetch(resp['data']['download_url']).then(
+					(contents) => { testRawContents = contents },
+					(error) => { reject(error); }
+				);			
+				if (!testRawContents)
+					return;
+
+				// parse JSON
+				let testInfo = null;
+				await testRawContents.json().then(
+					(obj) => { testInfo = obj },
+					(error) => { reject(error); }
+				);			
+				if (!testInfo)
+					return;
 
 				// Add missing ID field
 				testInfo.id = testId;
 
 				// Get pictures' actual URLs
-				testInfo.problem.pictureUrl = (await _requestPath(`tests/${testId}/${testInfo.problem.pictureUrl}`))['data']['download_url'];
+				// Request problem picture
+				let actualPictureUrl = null;
+				await _requestPath(`tests/${testId}/${testInfo.problem.pictureUrl}`).then(
+					(pictureFileInfo) => { actualPictureUrl = pictureFileInfo['data']['download_url']; },
+					(error) => { reject(error); }
+				);
+				if (!actualPictureUrl)
+					return;
+				testInfo.problem.pictureUrl = actualPictureUrl;
+
+				// Request solution picture
 				if (!testInfo.solution.pictureUrl) {
 					testInfo.solution.pictureUrl = testInfo.problem.pictureUrl;
 				} else {
-					testInfo.solution.pictureUrl = (await _requestPath(`tests/${testId}/${testInfo.solution.pictureUrl}`))['data']['download_url'];
+					let actualPictureUrl = null;
+					await _requestPath(`tests/${testId}/${testInfo.solution.pictureUrl}`).then(
+						(pictureFileInfo) => { actualPictureUrl = pictureFileInfo['data']['download_url']; },
+						(error) => { reject(error); }
+					);
+					if (!actualPictureUrl)
+						return;
+					testInfo.solution.pictureUrl = actualPictureUrl;
 				}
 
 				TestsAPI.cache.testList[testInfo.id] = testInfo;
@@ -46,20 +78,36 @@ export default class TestsAPI {
 	}
 
 	static requestIdList() {
-		return _requestPath("tests").then((resp) => {
-			return resp['data'].map((e) => e.name);
+		return new Promise( async (resolve, reject) => {
+			let resp = await _requestPath("tests");
+			if (resp.status !== 200) {
+				reject(resp);
+				return;
+			}
+			resolve(resp['data'].map((e) => e.name));
 		});
 	}
 
 	static requestTestList(filter = null) {
 		let testList = [];
-		return this.requestIdList().then((ids) => {
+		return new Promise( async (resolve, reject) => {
+			let ids = await this.requestIdList().then(
+				(ids) => ids,
+				(errorResp) => { reject(errorResp); return null; }
+			);
+			if (!ids) {
+				return;
+			}
+
 			let promiseArray = ids.map(async (id) => {
 				let info = await this.requestTestInfo(id);
 				testList.push(info);
 			});
-			return Promise.all(promiseArray);
-		}).then((res) => testList);
+			await Promise.all(promiseArray).then(
+				() => resolve(testList),
+				(err) => reject(err),
+			);
+		});
 	}
 
 	static requestStarredTests() {
@@ -77,17 +125,19 @@ export default class TestsAPI {
 
 
 async function _requestPath(path) {
-	return GitHub.request('GET /repos/{owner}/{repo}/contents/{path}', {
-		owner: 'nkg-17',
-		repo: 'math-tests-archive',
-		path: path
-	}).then(
-		(resp) => resp,
-		(error) => null
-	);
-}
+	return new Promise(async (resolve, reject) => {
+		let resp = null;
+		await GitHub.request('GET /repos/{owner}/{repo}/contents/{path}', {
+			owner: 'nkg-17',
+			repo: 'math-tests-archive',
+			path: path
+		}).then(
+			(r) => { resp = r; },
+			(error) => { reject(error); }
+		);
+		if (!resp)
+			return;
 
-
-function OnHitRateLimit(retryAfter, options, octokit) {
-	console.warn(`Hit request rate limit! (retry after: ${retryAfter}, options: ${options})`);
+		resolve(resp);
+	});
 }

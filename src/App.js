@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import CatalogPage from 	'./pages/CatalogPage';
 import TestPage from	 	'./pages/TestPage';
-import ErrorPage from 	'./pages/ErrorPage';
+import NotFoundPage from 	'./pages/NotFoundPage';
 
 import Header from 	'./components/Header';
 
@@ -19,8 +19,8 @@ export default function App() {
 					<Routes>
 						<Route exact path="/" element={ <CatalogPage /> } />
 						<Route exact path="/test/:id" element={ <TestPage /> } />
-						<Route exact path="/404" element={ <ErrorPage /> } />
-						<Route path="*" element={<ErrorPage />} />
+						<Route exact path="/404" element={ <NotFoundPage /> } />
+						<Route path="*" element={<NotFoundPage />} />
 	 				</Routes>
 			</Router>
 		</div>

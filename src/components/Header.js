@@ -29,10 +29,10 @@ export default function Header(props) {
 								<NavDropdown.Item href="https://github.com/nkg-17/math-tests">Репозиторий проекта</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
-						
+						{ /*
 						<Button variant="light">
 							<i className="bi bi-moon" />
-						</Button>
+						</Button> */ }
 					</Navbar.Collapse>
 
 			</Container>

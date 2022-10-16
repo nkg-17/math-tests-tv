@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap';
 
 
-export default function ErrorPage(props) {
+export default function NotFoundPage(props) {
 	if (props.message) {
 		return (
 			<Container className="mt-3">
