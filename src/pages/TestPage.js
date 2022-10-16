@@ -8,8 +8,7 @@ import {
 	Row,
 	Col,
 	Button,
-	Nav,
-	Form
+	Nav
 } from 'react-bootstrap';
 import TestsAPI from '../api/TestsAPI';
 
@@ -38,7 +37,7 @@ export default function TestPage(props) {
 
 	function ProblemTab(index) {
 		return (
-			<div>
+			<>
 				<p>{state.testInfo.problem.preface}</p>
 				<ol>
 				{
@@ -50,25 +49,17 @@ export default function TestPage(props) {
 					); })
 				}
 				</ol>
-				<Container fluid className="my-2">
-					<Row className="d-flex flex-row gx-2 gy-1">
-						<Col className="col-auto">
-							<Form>
-								<Form.Control type="text" placeholder="">
-								</Form.Control>
-							</Form>
-						</Col>
-						<Col className="col-auto">
-							<Button variant="success" onClick={() => { openSolution(); }}>Ответить</Button>
-						</Col>
-					</Row>
-				</Container>
-			</div>
+				{
+					(!state.solutionOpened) ? (
+						<Button variant="outline-success" onClick={openSolution}>Открыть решение</Button>
+					) : (<></>)
+				}
+			</>
 		);
 	}
 	function SolutionTab(index) {
 		return (
-			<div>
+			<>
 				<p>{state.testInfo.solution.preface}</p>
 				<ul>
 				{
@@ -77,14 +68,14 @@ export default function TestPage(props) {
 					); })
 				}
 				</ul>
-			</div>
+			</>
 		);
 	}
 	function ErrorTab(index) {
 		return (
-			<div>
+			<>
 				Tab {index}
-			</div>
+			</>
 		);
 	}
 
@@ -109,7 +100,7 @@ export default function TestPage(props) {
 
 	if (state.status === Status.Ok) {
 		return (
-			<Container className="TestPage py-3">
+			<Container className="py-3">
 				<Row className="mb-1">
 					<Col md={6} sm={12}>
 						<Nav justify variant="pills" activeKey={state.tabIndex} onSelect={selectTab}>
@@ -133,14 +124,18 @@ export default function TestPage(props) {
 						</Container>
 
 						<div className="w-100 py-2 d-flex flex-row justify-content-between">
-							<Button variant="light"><i className="bi bi-fullscreen" /></Button>
-							<LinkContainer to={ "/" }><Button variant="outline-secondary">Следующая задача</Button></LinkContainer>
+							<LinkContainer to={ "/" }><Button variant="light">Вернутся</Button></LinkContainer>
+							<LinkContainer to={ "/" }><Button variant="light">Следующая задача</Button></LinkContainer>
 						</div>
 					</Col>
 					<Col md={6} sm={12}>
 						<Container className="TestPicturePanel p-2 border">
 							<img src={state.testInfo.problem.pictureUrl} className="TestPicture" alt="" />
 						</Container>
+
+						<div className="w-100 py-2 d-flex flex-row-reverse">
+							<LinkContainer to={ "/" }><Button variant="light"><i className="bi bi-fullscreen" /></Button></LinkContainer>
+						</div>
 					</Col>
 				</Row>
 			</Container>
@@ -149,21 +144,8 @@ export default function TestPage(props) {
 		return (<Navigate to="/404" />);
 	} else {
 		return (
-			<Container className="TestPage py-3">
-				<Row className="gy-2">
-					<Col md={6} sm={12}>
-						<Container className="TestProblemPanel p-2 border d-flex flex-column justify-content-between">
-						</Container>
-						<div className="w-100 mt-2 d-flex flex-row justify-content-between">
-							<Button variant="light"><i className="bi bi-fullscreen" /></Button>
-							<LinkContainer to={ "/" }><Button variant="outline-secondary">Следующая задача</Button></LinkContainer>
-						</div>
-					</Col>
-					<Col md={6} sm={12}>
-						<Container className="TestPicturePanel p-2 border">
-						</Container>
-					</Col>
-				</Row>
+			<Container className="py-3">
+				Loading...
 			</Container>
 		);
 	}

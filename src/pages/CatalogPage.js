@@ -42,9 +42,8 @@ export default function CatalogPage() {
 				<Col className="col">
 					<NamedDropdown 
 					changeTitle={true}
-					theme="light"
-					title="Тип задач" 
-					items={{ 0: "Все", 1: "Треугольники", 2: "Объём", 3: "Прямоугольники" }} 
+					title="Сортировать" 
+					items={{ 0: "Все", 1: "Лучшие", 2: "Треугольники", 3: "Объём", 4: "Прямоугольники" }} 
 					onChange={(k, e) => {}} />
 				</Col>
 			</Row>
