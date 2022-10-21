@@ -1,9 +1,53 @@
 # Сайт задач по Стереометрии ЕГЭ
 
-### Полезные ссылки
-- [React Turorial](https://www.youtube.com/playlist?list=PLVfMKQXDAhGWamOcqqIsMAbsP6pl0vUtW)
-- [React](https://reactjs.org/docs/getting-started.html)
-- [React Bootstrap](https://react-bootstrap.github.io/getting-started/introduction)
-- [React Router](https://v5.reactrouter.com/web/guides/primary-components)
-- Bootstrap Examples:
-  - [Bootstrap 5 Album](https://getbootstrap.com/docs/5.0/examples/album/#)
+- [Архив Задач](https://github.com/nkg-17/math-tests-archive)
+- [Заметки](notes.md)
+
+## Структура файла описания теста
+```json
+{
+    "layout": "",
+    "title": "",
+    "tags": [],
+
+    "problem": {
+        "text": "",
+        "answer": null,
+        "picture": "",
+
+        "tasks": [
+            { "title": "", "text": "", "answer": null }
+        ]
+    },
+
+    "tips": [ "", "" ],
+
+    "solution": {
+        "text": "",
+        "answer": null,
+        "picture": "",
+
+        "tasks" : [ 
+            { "text": "", "answer": null } 
+        ]
+    }
+}
+```
+- `layout`
+  - `single-panel` - Задача без рисунка.
+  - `double-panel` - Задача с рисунком. Условие слева, рисунок справа.
+- `title` - Заголовок к задаче.
+- `tags` - Тэги, тип задача. Для упрощённого поиска.
+- `problem`
+  - `text` - Условие задачи.
+  - `answer` - Описание поля ответа. `null` если поле не нужно.
+    - `"..."` - Плейсхолдер в поле ввода ответа. Ответ - строка, число и т.п.
+    - `["", "", ...]` - Варианты ответов.
+  - `tasks` - Нумерованные подзадачи.
+    - `title` - Заголовок подзадачи, например `Найти` или `Доказать`.
+    - `text` - Текст подзадачи.
+    - `answer` - То же, что и `problem.answer`.
+  - `picture` - Путь к файлу рисунка к условию ***относительно*** файла `description.json`.
+- `solution` - Поля те же, что и в `problem` за исключением полей:
+  - `answer` - строка, если тип ответа - строка, иначе индекс варианта ответа (число). Или `null`.
+  - `tasks` - Как в `problem.tasks`, но без поля `title`.

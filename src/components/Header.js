@@ -1,12 +1,16 @@
 import React from 'react';
 
 import { LinkContainer } from 'react-router-bootstrap';
-import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import ThemeSwitch from './ThemeSwitch';
 
 
-export default function Header(props) {
+function Header(props) {
+	const ARCHIVE_URL = "https://github.com/nkg-17/math-tests-archive";
+	const ISSUES_URL = "https://github.com/nkg-17/math-tests/issues/new";
+	const REPO_URL = "https://github.com/nkg-17/math-tests";
+
 	return (
-		<>
 		<Navbar 
 			fixed="top" 
 			style={{position: "sticky"}} 
@@ -23,20 +27,17 @@ export default function Header(props) {
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="me-auto">
 							<NavDropdown title="Справка">
-								<NavDropdown.Item href="https://github.com/nkg-17/math-tests-archive">Редактировать Задачи</NavDropdown.Item>
+								<NavDropdown.Item href={ARCHIVE_URL}>Редактировать Задачи</NavDropdown.Item>
 								<NavDropdown.Divider />
-								<NavDropdown.Item href="https://github.com/nkg-17/math-tests/issues/new">Сообщить об ошибке</NavDropdown.Item>
-								<NavDropdown.Item href="https://github.com/nkg-17/math-tests">Репозиторий проекта</NavDropdown.Item>
+								<NavDropdown.Item href={ISSUES_URL}>Сообщить об ошибке</NavDropdown.Item>
+								<NavDropdown.Item href={REPO_URL}>Репозиторий проекта</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
-						{ /*
-						<Button variant="light">
-							<i className="bi bi-moon" />
-						</Button> */ }
+						<ThemeSwitch />
 					</Navbar.Collapse>
-
 			</Container>
 		</Navbar>
-		</>
 	);
 }
+
+export default Header;

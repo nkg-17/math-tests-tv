@@ -1,4 +1,3 @@
-
 import './TestPreviewCard.css';
 
 import { LinkContainer } from 'react-router-bootstrap'
@@ -7,7 +6,7 @@ import React from 'react';
 import { Card, Row, Col, Badge } from 'react-bootstrap';
 
 
-export default function TestPreviewCard(props) {
+function TestPreviewCard(props) {
 	return (
 		<div className="TestPreviewCard">
 			<LinkContainer to={`/test/${props.test.id}`}>
@@ -40,7 +39,19 @@ export default function TestPreviewCard(props) {
 									}
 							</Row>
 
-							<Card.Text className="TestPreviewCardText">{props.test.problem.preface}</Card.Text>
+							<Card.Text className="TestPreviewCardText">
+								{
+									(props.test.problem.preface) ? (
+										<>{props.test.problem.preface}</>
+									) : (
+										(props.test.problem.tasks) ? (
+											<>{props.test.problem.tasks[0].title} {props.test.problem.tasks[0].text}</>
+										) : (
+											<>(Без текста)</>
+										)
+									)
+								}
+							</Card.Text>
 						</Card.Body>
 					</Card>
 				</Link>
@@ -48,3 +59,5 @@ export default function TestPreviewCard(props) {
 		</div>
 	);
 }
+
+export default TestPreviewCard;

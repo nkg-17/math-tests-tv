@@ -17,10 +17,10 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => {
 	);
 });
 
-export default function NamedDropdown(props) {
+function NamedDropdown(props) {
 	function handleOnSelect(key, e) {
 		if (props.onChange)
-			props.onChange(key, e);
+			props.onChange(key);
 
 		if (props.changeTitle)
 			setChoosedItem({ title: props.items[key], id: key });
@@ -45,3 +45,5 @@ export default function NamedDropdown(props) {
 		</Dropdown>
 	);
 }
+
+export default NamedDropdown;

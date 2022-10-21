@@ -5,38 +5,17 @@ import {
 } from 'react-bootstrap';
 
 
-export default function NotFoundPage(props) {
-	if (props.message) {
-		return (
-			<Container className="mt-3">
-				<Alert variant="danger">
-					<Alert.Heading>{props.message.title}</Alert.Heading>
-					{
-						(props.message.description) ? (
-							<div>
-								<p>
-									{props.message.description}
-								</p>
-								<hr />
-							</div>
-						) : (<></>)
-					}
-					<p>
-						<LinkContainer to="/"><Alert.Link>Вернуться на Главную страницу</Alert.Link></LinkContainer>
-					</p>
-				</Alert>
-			</Container>
-		);
-	} else {
-		return (
-			<Container className="mt-3">
-				<Alert variant="danger">
-					<Alert.Heading>Страница не существует.</Alert.Heading>
-					<p>
-						<LinkContainer to="/"><Alert.Link>Вернуться на Главную страницу</Alert.Link></LinkContainer>
-					</p>
-				</Alert>
-			</Container>
-		);
-	}
+function NotFoundPage(props) {
+	return (
+		<Container className="mt-3">
+			<Alert variant="danger">
+				<Alert.Heading>Страница не существует.</Alert.Heading>
+				<p>
+					<LinkContainer to="/"><Alert.Link>Вернуться на Главную страницу</Alert.Link></LinkContainer>
+				</p>
+			</Alert>
+		</Container>
+	);
 }
+
+export default NotFoundPage;

@@ -1,34 +1,22 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	InputGroup,
-	Form,
-	Spinner
+	Form
 } from 'react-bootstrap';
 
-export default function SearchBar(props) {
-	const [ isSelected, setSelected ] = useState(false);
 
+function SearchBar(props) {
 	return (
 		<InputGroup>
 			<InputGroup.Text>
-			{
-				(props.loading) ? (
-					<Spinner 
-					animation="border" 
-					variant="secondary" 
-					size="sm" 
-					style={{ borderWidth: "0.15rem" }} />
-				) : (
-					<i className="bi bi-search"/>
-				)
-			}
+				<i className="bi bi-search"/>
 			</InputGroup.Text>
 			<Form.Control  
 				placeholder={props.placeholder}
-				onClick={(e) => { setSelected(!isSelected); }}
-				onInput={(e) => { if (props.onChange) props.onChange(e); }}
+				onInput={(e) => { if (props.onChange) props.onChange(e.target.value); }}
 				/>
 		</InputGroup>
 	);
 }
+
+export default SearchBar;
