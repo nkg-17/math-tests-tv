@@ -15,23 +15,22 @@ import TestPreviewList from './TestPreviewList';
 
 
 export default function CatalogPage() {
-	const [ tests, setTests ] = useState(null);
-	let status = useRef(Status.Waiting);
+	const [ status, setStatus ] = useState(Status.Waiting);
 	let error = useRef(null);
+	let tests = useRef(null);
 
 	useEffect(
 		() => {
 			TestsAPI.requestTestList().then(
 				(list) => { 
-					status.current = Status.Ok;
-					setTests(list);
+					tests.current = list;
+					error.current = null;
+					setStatus(Status.Ok);
 				},
 				(err) => {
-					status.current = Status.Failed;
+					tests.current = null;
 					error.current = err;
-					console.log(`Failed to fetch test list`);
-					console.error(err);
-					setTests(null);
+					setStatus(Status.Failed);
 				}
 			);
 			return () => {};
@@ -42,12 +41,12 @@ export default function CatalogPage() {
 		<Container className="mt-3">
 				{
 					(() => {
-						switch (status.current) {
+						switch (status) {
 							case Status.Ok:
 								return (
 									<>
 										<TestSearchForm />
-										<TestPreviewList tests={tests} />
+										<TestPreviewList tests={tests.current} />
 									</>
 								);
 
@@ -55,7 +54,8 @@ export default function CatalogPage() {
 								return (
 									<Warning 
 									heading="Ошибка" 
-									text={error.current.toString()} />
+									text={error.current.toString()}
+									description="Откройте Консоль в Инструментах разработчика (Ctrl+Shift+I) чтобы увидеть подробности." />
 								);
 
 							case Status.Waiting:

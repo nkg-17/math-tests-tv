@@ -12,21 +12,13 @@ function TestPreviewCard(props) {
 			<LinkContainer to={`/test/${props.test.id}`}>
 				<Link className="text-dec-none">
 					<Card className="h-100">
-						{
-							(props.test.starred) ? (
-								<i className="bi bi-star-fill TestPreviewCardStar" />
-							) : (
-								null
-							)
-						}
-						
 						<Row className="justify-content-center">
 							<Col>
-								<Card.Img className="TestPreviewCardImg p-2" src={props.test.problem.pictureUrl} />
+								<Card.Img className="TestPreviewCardImg p-2" src={props.test.problem.picture} />
 							</Col>
 						</Row>
 						<Card.Body className="h-100">
-							<Card.Title className="TestPreviewCardTitle">{props.test.name}</Card.Title>
+							<Card.Title className="TestPreviewCardTitle">{props.test.title}</Card.Title>
 							<Row className="w-100 g-1 mb-1">
 									{
 										props.test.tags.map((tag) => {
@@ -41,8 +33,8 @@ function TestPreviewCard(props) {
 
 							<Card.Text className="TestPreviewCardText">
 								{
-									(props.test.problem.preface) ? (
-										<>{props.test.problem.preface}</>
+									(props.test.problem.text) ? (
+										<>{props.test.problem.text}</>
 									) : (
 										(props.test.problem.tasks) ? (
 											<>{props.test.problem.tasks[0].title} {props.test.problem.tasks[0].text}</>

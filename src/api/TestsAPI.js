@@ -1,26 +1,33 @@
 import { Octokit } from "octokit";
+import MathTest from '../common/MathTest';
 
 
-const OctokitOptions = {
-	userAgent: "math-tests-app/v1.0.0"
-};
-const GitHub = new Octokit(OctokitOptions);
-
-
-export default class TestsAPI {
+class GithubTestsAPI {
+	static OctokitAPI = null;
 	static cache = {
 		testList: {}
 	};
 
+	static init() {
+		this.OctokitAPI = new Octokit({
+			userAgent: "math-tests-app/v1.0.0"
+		});
+	}
+
 	static requestTestInfo(testId, fetchCache = true) {
-		if (fetchCache && TestsAPI.cache.testList[testId] !== undefined) {
-			return new Promise((resolve, reject) => { resolve(TestsAPI.cache.testList[testId]); });
+		if (fetchCache && this.cache.testList[testId] !== undefined) {
+			return new Promise((resolve, reject) => { resolve(this.cache.testList[testId]); });
 		} else {
 			return new Promise(async (resolve, reject) => {
 				let resp = null;
-				await _requestPath(`tests/${testId}/description.json`).then(
+				await this._requestPath(`tests/${testId}/description.json`).then(
 					(okResp) => { resp = okResp; },
-					(errResp) => { reject(errResp); },
+					(error) => { 
+						console.error(`GET ${testId}/description.json. Error:`, error);
+						let myError = new Error(error);
+						myError.message = `(Test ${testId}) ` + error.toString();
+						reject(myError);
+					},
 				);
 				if (!resp)
 					return;
@@ -29,62 +36,90 @@ export default class TestsAPI {
 				let testRawContents = null;
 				await fetch(resp['data']['download_url']).then(
 					(contents) => { testRawContents = contents },
-					(error) => { reject(error); }
+					(error) => { 
+						console.error(`FETCH ${testId}/description.json. Error:`, error); 
+						let myError = new Error(error);
+						myError.message = `(Test ${testId}) ` + error.toString();
+						reject(myError);
+					}
 				);			
 				if (!testRawContents)
 					return;
 
 				// parse JSON
-				let testInfo = null;
+				let mathTest = new MathTest();
 				await testRawContents.json().then(
-					(obj) => { testInfo = obj },
-					(error) => { reject(error); }
+					(obj) => { mathTest.loadFromDescription(obj); },
+					(error) => { 
+						console.error(`PARSE ${testId}/description.json. Error:`, error); 
+						let myError = new Error(error);
+						myError.message = `(Test ${testId}) ` + error.toString();
+						reject(myError);
+					}
 				);			
-				if (!testInfo)
-					return;
 
 				// Add missing ID field
-				testInfo.id = testId;
+				mathTest.id = testId;
 
-				// Get pictures' actual URLs
-				// Request problem picture
-				let actualPictureUrl = null;
-				await _requestPath(`tests/${testId}/${testInfo.problem.pictureUrl}`).then(
-					(pictureFileInfo) => { actualPictureUrl = pictureFileInfo['data']['download_url']; },
-					(error) => { reject(error); }
-				);
-				if (!actualPictureUrl)
-					return;
-				testInfo.problem.pictureUrl = actualPictureUrl;
-
-				// Request solution picture
-				if (!testInfo.solution.pictureUrl) {
-					testInfo.solution.pictureUrl = testInfo.problem.pictureUrl;
-				} else {
-					let actualPictureUrl = null;
-					await _requestPath(`tests/${testId}/${testInfo.solution.pictureUrl}`).then(
-						(pictureFileInfo) => { actualPictureUrl = pictureFileInfo['data']['download_url']; },
-						(error) => { reject(error); }
+				/*
+				let picUrl = null;
+				if (mathTest.problem.picture) {
+					// Get pictures' actual URLs
+					await this._requestPictureURL(
+						testId, mathTest.problem.picture
+					).then(
+						(url) => { picUrl = url; },
+						(err) => { reject(err); }
 					);
-					if (!actualPictureUrl)
+					if (!picUrl)
 						return;
-					testInfo.solution.pictureUrl = actualPictureUrl;
+					mathTest.problem.picture = picUrl;
 				}
 
-				TestsAPI.cache.testList[testInfo.id] = testInfo;
-				resolve(testInfo);
+				if (!mathTest.solution.picture) {
+					mathTest.solution.picture = mathTest.problem.picture;
+				} else {
+					picUrl = null;
+					await this._requestPictureURL(
+						testId, mathTest.solution.picture
+					).then(
+						(url) => { picUrl = url; },
+						(err) => { reject(err); }
+					);
+					if (!picUrl)
+						return;
+					mathTest.solution.picture = picUrl;
+				}
+				*/
+
+				let valid = mathTest.verify();
+				if (!valid.ok) {
+					let myError = new Error(`(Test ${testId}) ` + valid.error);
+					console.error(`VALIDATE ${testId}. Error:`, myError);
+					reject(myError);
+					return;
+				}
+
+				this.cache.testList[mathTest.id] = mathTest;
+				resolve(mathTest);
 			});
 		}
 	}
 
 	static requestIdList() {
 		return new Promise( async (resolve, reject) => {
-			let resp = await _requestPath("tests");
-			if (resp.status !== 200) {
-				reject(resp);
-				return;
-			}
-			resolve(resp['data'].map((e) => e.name));
+			this._requestPath("tests").then(
+				(resp) => {
+					if (resp.status !== 200) {
+						reject(resp);
+						return;
+					}
+					resolve(resp['data'].map((e) => e.name));
+				},
+				(error) => {
+					reject(error);
+				}
+			);
 		});
 	}
 
@@ -110,34 +145,78 @@ export default class TestsAPI {
 		});
 	}
 
-	static requestStarredTests() {
-		return new Promise((resolve, reject) => {
-			reject("Not implemented");
+	static _requestPath(path) {
+		return new Promise(async (resolve, reject) => {
+			let resp = null;
+			await this.OctokitAPI.request('GET /repos/{owner}/{repo}/contents/{path}', {
+				owner: 'nkg-17',
+				repo: 'math-tests-archive',
+				path: path
+			}).then(
+				(r) => { resp = r; },
+				(error) => { reject(error); }
+			);
+			if (!resp)
+				return;
+
+			resolve(resp);
 		});
 	}
-	
-	static requestTagList() {
-		return new Promise((resolve, reject) => {
-			reject("Not implemented");
+
+	static _requestPictureURL(testId, picName) {
+		return new Promise(async (resolve, reject) => {
+			let actualUrl = null;
+			await this._requestPath(`tests/${testId}/${picName}`).then(
+				(inf) => { actualUrl = inf['data']['download_url']; },
+				(error) => { 
+					console.error(`GET PROBLEM PIC ${testId}/${picName}. Error:`, error); 
+					let myError = new Error(error);
+					myError.cause = 'Test ' + testId;
+					reject(myError);
+				}
+			);
+			if (!actualUrl)
+				return;
+
+			resolve(actualUrl);
 		});
 	}
 }
 
+/*
+	Sometimes you can reach GitHub's request limit 
+	so you may use this on instead.
+*/
+class LocalTestsAPI {
+	static requestTestInfo(testId) {
+	}
 
-async function _requestPath(path) {
-	return new Promise(async (resolve, reject) => {
-		let resp = null;
-		await GitHub.request('GET /repos/{owner}/{repo}/contents/{path}', {
-			owner: 'nkg-17',
-			repo: 'math-tests-archive',
-			path: path
-		}).then(
-			(r) => { resp = r; },
-			(error) => { reject(error); }
-		);
-		if (!resp)
+	static requestIdList() {
+	}
+
+	static requestTestList() {
+	}
+}
+
+export default class TestsAPI {
+	static _Backends = {
+		'github': GithubTestsAPI, 
+		'local': LocalTestsAPI
+	};
+	static _Backend = null;
+
+	static SetBackend(name) { 
+		if (!this._Backends[name]) {
+			console.error(`Unknown API backend name '${name}'`);
 			return;
+		}
 
-		resolve(resp);
-	});
+		this._Backend = this._Backends[name];
+		this._Backend.init();
+	}
+	static requestTestInfo(testId) { return this._Backend.requestTestInfo(testId); }
+	static requestIdList() { return this._Backend.requestIdList(); }
+	static requestTestList() { return this._Backend.requestTestList(); }
 }
+
+TestsAPI.SetBackend('github');

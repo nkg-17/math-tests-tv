@@ -14,9 +14,8 @@ function TestPreviewList(props) {
 			<Row className="gx-5 gy-4">
 				<Col
 				lg={3} md={4} sm={6} xs={12}>
-				<TestPreviewCard test={{ id: -1, name: '404', tags: [], problem: { preface: '', pictureUrl: '/math-tests/logo192.png' } }} />
+				<TestPreviewCard test={{ id: -1, title: '404', tags: [], problem: { text: '', picture: '/math-tests/logo192.png' } }} />
 				</Col>
-				
 				{
 					props.tests.map((test) => {
 						return (
