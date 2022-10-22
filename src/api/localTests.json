@@ -1,0 +1,51 @@
+[
+	{
+		"id": "85018",
+		"title": "Test 85018",
+		"tags": [ "tag0", "tag1" ],
+
+		"problem": {
+			"text": "text",
+			"answer": "Enter the answer"
+		},
+
+		"solution": {
+			"text": "Solution text",
+			"answer": "123"
+		}
+	},
+	{
+		"id": "1142",
+		"title": "Test 1142",
+
+		"problem": {
+			"text": "Problem text",
+			"answer": [ "Oranges", "Apples" ],
+			"picture": "logo192.png"
+		},
+
+		"tips": [ "Tip 1", "Tip 2" ],
+
+		"solution": {
+			"text": "Solution text",
+			"answer": 1
+		}
+	},
+	{
+		"id": "732",
+		"title": "Test 732",
+		"tags": [ "tag0", "fruits" ],
+
+		"problem": {
+			"text": "Problem text",
+			"answer": [ "Oranges", "Apples" ],
+			"picture": "logo192.png"
+		},
+
+		"solution": {
+			"text": "Solution text",
+			"answer": 1,
+			"picture": "logo512.png"
+		}
+	}
+]
