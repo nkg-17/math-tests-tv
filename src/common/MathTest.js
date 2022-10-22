@@ -1,124 +1,114 @@
 
 
-class ProblemAnswerType {
+class TestAnswerType {
 	static String = 0;
 	static Choise = 1;
 };
 
-/*
-	Represents generic math this.
-	Also loads its data from "description.json" contents.
-*/
-export default class MathTest {
-	constructor(props) {
-		if (props)
-			this.loadFromDescription(props);
-	}
-
-	loadFromDescription(props) {
-		this.id = props.id;
-		this.title = props.title;
-		this.tags = props.tags;
-
+/* Represents generic math this. */
+export class MathTest {
+	constructor() {
+		this.id = null;
+		this.title = null;
+		this.tags = null;
 		this.problem = {
-			text: props.problem.text,
-			picture: props.problem.picture,
-			answer: this._getTaskAnswer(props.problem)
+			text: null,
+			picture: null,
+			answer: {
+				type: null,
+				placeholder: null,
+				choises: null
+			}
 		};
-
-		this.tips = props.tips;
-
+		this.tips = null;
 		this.solution = {
-			text: props.problem.text,
-			picture: (props.solution.picture) ? props.solution.picture : props.problem.picture,
-			answer: props.solution.answer
-		}
-	}
-
-	verify() {
-		function _isAnswerValid(answer) {
-			if (answer === undefined || answer === null)
-				return true;
-
-			if ((answer.type === ProblemAnswerType.String && typeof(answer.value) !== typeof("")) ||
-				(answer.type === ProblemAnswerType.Choise && typeof(answer.value) !== typeof([])))
-				return false;
-
-			return true;
-		}
-
-		let status = {
-			ok: true,
-			error: null,
-			invalidField: null
+			text: null,
+			answer: null,
+			picture: null
 		};
+	}
+}
 
-		function setStatusError(error, field=null) {
-			status.ok = false;
-			status.error = error;
-			status.invalidField = field;
-		}
+export function isTestValid(test) {
+	if (!checkFieldsPresent(test)) return false;
+	if (!checkFieldTypes(test)) return false;
+	if (!checkProblemSolutionStructure(test?.problem)) return false;
+	if (!checkProblemSolutionStructure(test?.solution)) return false;
+	if (!checkProblemSolutionStructure(test)) return false;
+	if (!checkProblemAnswer(test)) return false;
+	if (!checkSolutionAnswer(test)) return false;
 
-		if (!this.id) 		{ setStatusError("'id' field is not defined. It should not be defined in description.json though which means it's an internal error"); return status; }
-		if (!this.title) 	{ setStatusError("'title' field is not defined"); return status; }
-		if (!this.tags) 	{ setStatusError("'tags' field is not defined"); return status; }
-		if (!this.problem) 	{ setStatusError("'problem' field is not defined"); return status; }
-		if (!this.solution) { setStatusError("'solution' field is not defined"); return status; }
+	return true;
+}
 
-		// Check this.problem
-		if (!this.problem.text) 
-			{ setStatusError("'problem.text' is not defined"); return status; }
-		if (!_isAnswerValid(this.problem.answer))
-			{ setStatusError(`'problem.answer' is invalid (answer: ${JSON.stringify(this.problem.answer)})`); return status; }
 
-		// Check this.tips
-		if (this.tips !== undefined && this.tips !== null && typeof(this.tips) !== typeof(""))
-			{ setStatusError("'tips' is invalid", this.tips); return status; }
+function eqType(a, b) {
+	return typeof(a) === typeof(b);
+}
 
-		// Check this.solution
-		if (!this.solution.text) 
-			{ setStatusError("'solution.text' is not defined"); return status; }
+function isSet(a) {
+	return a !== undefined && a !== null;
+}
 
-		// Has answer in problem but not in the solution and otherwise
-		if ((this.problem.answer === undefined || this.problem.answer === null) && this.solution.answer)
-			{ setStatusError("'solution.answer' should not be defined because 'problem.answer' is not defined"); return status; }
-		if (this.problem.answer && (this.solution.answer === undefined || this.solution.answer === null))
-			{ setStatusError("'solution.answer' should be defined because 'problem.answer' is defined"); return status; }
+function checkFieldsPresent(test) {
+	if (!isSet(test?.id)) return false;
+	if (!isSet(test?.title)) return false;
+	if (!isSet(test?.problem)) return false;
+	if (!isSet(test?.solution)) return false;
 
-		// solution answer doesn't match problem answer type
-		if (this.problem.answer) {
-			if (this.problem.answer.type === ProblemAnswerType.String) {
-				if (typeof(this.solution.answer) !== typeof(""))
-					{ setStatusError("'solution.answer' should be a string, because problem answer is a string", this.solution.answer); return status; }
-			}
-			if (this.problem.answer.type === ProblemAnswerType.Choise) {
-				if (typeof(this.solution.answer) !== typeof(0))
-					{ setStatusError(`'solution.answer' should be a number from 0 to ${this.problem.answer.value.length-1}, because problem answer is a choise`, this.solution.answer); return status; }
-				if (this.solution.answer < 0 || this.solution.answer >= this.problem.answer.value.length-1)
-					{ setStatusError(`'solution.answer' is out of range. It may take values from 0 to ${this.problem.answer.value.length-1}`, this.solution.answer); return status; }
-			}
-		}
+	return true;
+}
 
-		return status;
+function checkFieldTypes(test) {
+	if (!eqType(test?.id, 0)) return false;
+	if (!eqType(test?.title, "")) return false;
+	if (!eqType(test?.tags, [])) return false;
+	if (!eqType(test?.problem, {})) return false;
+	if (!eqType(test?.solution, {})) return false;
+
+	return true;
+}
+
+function checkProblemSolutionStructure(obj) {
+	if (!isSet(obj?.text)) return false;
+	if (!isSet(obj?.answer)) return false;
+	if (!isSet(obj?.answer?.type)) return false;
+
+	if (isSet(obj?.picture))
+		if (!eqType(obj?.picture, "")) return false;
+
+	return true;
+}
+
+function checkProblemAnswer(test) {
+	const answer = test?.problem?.answer;
+
+	if (answer?.type === TestAnswerType.String) {
+		if (!isSet(answer?.placeholder)) return false;
+		if (!eqType(answer?.placeholder, "")) return false;
+	}
+	else if (answer?.type === TestAnswerType.Choise) {
+		if (!isSet(answer?.choises)) return false;
+		if (!eqType(test?.answer?.choises, [])) return false;
+		
+		for (let choise of test?.answer?.choises)
+			if (!eqType(choise, "")) return false;
 	}
 
-	_getTaskAnswer(props) {
-		let out = {
-			type: (typeof(props.answer) === typeof([]) ? ProblemAnswerType.Choise : ProblemAnswerType.String),
-			value: props.answer
-		};
-		return out;
+	return true;
+}
+
+function checkSolutionAnswer(test) {
+	const answerType = test?.solution?.answer?.type;
+	const answer = test?.solution?.answer;
+
+	if (answerType === TestAnswerType.String) {
+		if (!eqType(answer, "")) return false;
+	}
+	else if (answerType === TestAnswerType.Choise) {
+		if (!eqType(answer, 0)) return false;
+		if (answer < 0 || answer >= test?.problem?.answer?.choises?.length) return false;
 	}
 
-	_getTasks(props) {
-		if (!props.tasks)
-			return undefined;
-
-		return props.tasks.map((task) => {
-			return {
-				...task,
-				answer: this._getTaskAnswer(task)
-			};
-		});
-	}
+	return true;
 }
