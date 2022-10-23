@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Button } from 'react-bootstrap';
 
 
@@ -13,4 +13,4 @@ function ThemeSwitch(props) {
 	);
 }
 
-export default ThemeSwitch;
+export default memo(ThemeSwitch);

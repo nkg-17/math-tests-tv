@@ -1,8 +1,8 @@
 import './TestPreviewCard.css';
 
+import React, { memo } from 'react';
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
-import React from 'react';
 import { Card, Row, Col, Badge } from 'react-bootstrap';
 
 
@@ -52,4 +52,4 @@ function TestPreviewCard(props) {
 	);
 }
 
-export default TestPreviewCard;
+export default memo(TestPreviewCard);

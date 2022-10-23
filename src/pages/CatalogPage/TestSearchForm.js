@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
 	Row,
 	Col
@@ -32,4 +32,4 @@ function TestSearchForm(props) {
 	);
 }
 
-export default TestSearchForm;
+export default memo(TestSearchForm);

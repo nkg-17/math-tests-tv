@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
 	Alert
 } from 'react-bootstrap';
@@ -21,4 +21,4 @@ function Warning(props) {
 	);
 }
 
-export default Warning;
+export default memo(Warning);

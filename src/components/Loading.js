@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
 	Spinner
 } from 'react-bootstrap';
 
 
-function Loading(props) {
+function Loading() {
 	return (
 		<Spinner animation="border" variant="secondary" />
 	);
 }
 
-export default Loading;
+export default memo(Loading);

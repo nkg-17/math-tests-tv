@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
 	Container,
 	Row,
@@ -31,4 +31,4 @@ function TestPreviewList(props) {
 	);
 }
 
-export default TestPreviewList;
+export default memo(TestPreviewList);

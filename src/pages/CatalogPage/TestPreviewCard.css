@@ -4,16 +4,16 @@
 	border-radius: 5px;
 	width: 100%;
 	height: 100%;
-	background-color: var(--bs-white);
+	background-color: white;
 
-	transition: all .2s ease-in-out;
+	transition: all .13s ease-in-out;
     cursor: pointer;
 }
 
 .TestPreviewCard:hover {
 	background-color: grey;
 	box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
-	transform: scale(1.02);
+	transform: scale(1.025);
 }
 
 .TestPreviewCardImg {
@@ -39,14 +39,6 @@
 	overflow: hidden;
 
 	background-color: transparent;
-}
-
-.TestPreviewCardStar {
-	position: absolute;
-	right: 0.5rem;
-
-	font-size: 1.5rem;
-	color: gold;
 }
 
 .text-dec-none {
