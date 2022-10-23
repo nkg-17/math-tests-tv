@@ -1,20 +1,37 @@
-
 import './App.css';
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import CatalogPage from 	'./pages/CatalogPage';
-import TestPage from	 	'./pages/TestPage';
-import NotFoundPage from 	'./pages/NotFoundPage';
+// import CatalogPage from 	'./pages/CatalogPage';
+// import TestPage from	 	'./pages/TestPage';
+// import NotFoundPage from 	'./pages/NotFoundPage';
 
-import Header from 	'./components/Header';
+// import Header from 	'./components/Header';
 
+import TestsAPI from './api/TestsAPI';
 
 export default function App() {
+	const [ text, setText ] = useState('loading');
+
+	useEffect(() => {
+		TestsAPI.requestTestList().then(
+			(list) => setText(list.map((item) => JSON.stringify(item, null, 4)).join('\n')),
+			(err) => setText(err)
+		);
+
+		return ()=>{};
+	});
+
 	return (
 		<div className="App">
-			<Router basename={process.env.PUBLIC_URL}>
+			<pre style={{ textAlign: "left" }}>{text}</pre>
+		</div>
+	);
+}
+
+/*
+<Router basename={process.env.PUBLIC_URL}>
 				<Header />
 					<Routes>
 						<Route exact path="/" element={ <CatalogPage /> } />
@@ -23,6 +40,4 @@ export default function App() {
 						<Route path="*" element={<NotFoundPage />} />
 	 				</Routes>
 			</Router>
-		</div>
-	);
-}
+*/

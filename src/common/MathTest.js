@@ -61,7 +61,7 @@ function checkFieldsPresent(test) {
 }
 
 function checkFieldTypes(test) {
-	if (!eqType(test?.id, 0)) 			return { ok: false, errorMessage: "'id' is not a number" };
+	if (!eqType(test?.id, "")) 			return { ok: false, errorMessage: "'id' is not a string" };
 	if (!eqType(test?.title, "")) 		return { ok: false, errorMessage: "'title' is not a string" };
 	if (test?.title === "") 			return { ok: false, errorMessage: "'title' is defined but empty" };
 	if (!eqType(test?.problem, {})) 	return { ok: false, errorMessage: "'problem' is not an object" };
