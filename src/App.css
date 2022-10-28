@@ -1,5 +1,9 @@
 .App {
 	height: 100vh;
+		
+	display: flex;
+	flex-flow: column;
+
 	text-align: center;
 
     background-color: white;

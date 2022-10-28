@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 
 import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import ThemeSwitch from './ThemeSwitch';
 
 
 function Header(props) {
@@ -16,8 +15,7 @@ function Header(props) {
 			style={{position: "sticky"}} 
 			collapseOnSelect 
 			expand="md"
-			variant="light"
-			bg="light">
+			variant="light">
 			<Container fluid>
 					<LinkContainer to="/">
 						<Navbar.Brand>Стереометрия ЕГЭ</Navbar.Brand>
@@ -33,7 +31,6 @@ function Header(props) {
 								<NavDropdown.Item href={REPO_URL}>Репозиторий проекта</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
-						<ThemeSwitch />
 					</Navbar.Collapse>
 			</Container>
 		</Navbar>

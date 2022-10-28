@@ -5,11 +5,11 @@ import {
 } from 'react-bootstrap';
 
 
-function NotFoundPage(props) {
+function ErrorPage(props) {
 	return (
 		<Container className="mt-3">
 			<Alert variant="danger">
-				<Alert.Heading>Страница не существует.</Alert.Heading>
+				<Alert.Heading>Ошибка</Alert.Heading>
 				<p>
 					<LinkContainer to="/"><Alert.Link>Вернуться на Главную страницу</Alert.Link></LinkContainer>
 				</p>
@@ -18,4 +18,4 @@ function NotFoundPage(props) {
 	);
 }
 
-export default NotFoundPage;
+export default ErrorPage;

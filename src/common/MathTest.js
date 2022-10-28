@@ -12,7 +12,6 @@ export class MathTest {
 		this.tags = null;
 		this.problem = {
 			text: null,
-			picture: null,
 			answer: {
 				type: null,
 				placeholder: null,
@@ -22,8 +21,7 @@ export class MathTest {
 		this.tips = null;
 		this.solution = {
 			text: null,
-			answer: null,
-			picture: null
+			answer: null
 		};
 	}
 }
@@ -95,11 +93,6 @@ function checkProblem(test) {
 	if (problem?.text === "") 		return { ok: false, errorMessage: `'problem.text' is defined but empty` };
 	if (!isSet(problem?.answer))	return { ok: false, errorMessage: `'problem.answer' is undefined` };
 
-	if (isSet(problem?.picture)) {
-		if (!eqType(problem?.picture, ""))	return { ok: false, errorMessage: `'problem.picture' is not a string` };
-		if (problem?.picture === "") 		return { ok: false, errorMessage: `'problem.picture' is defined but empty` };
-	}
-
 	return { ok: true, errorMessage: null };
 }
 
@@ -109,11 +102,6 @@ function checkSolution(test) {
 	if (!isSet(solution?.text)) 	return { ok: false, errorMessage: `'solution.text' is undefined` };
 	if (solution?.text === "") 		return { ok: false, errorMessage: `'solution.text' is defined but empty` };
 	if (!isSet(solution?.answer)) 	return { ok: false, errorMessage: `'solution.answer' is undefined` };
-
-	if (isSet(solution?.picture)) {
-		if (!eqType(solution?.picture, "")) return { ok: false, errorMessage: `'solution.text' is not a string` };
-		if (solution?.picture === "") 		return { ok: false, errorMessage: `'solution.picture' is defined but empty` };
-	}
 
 	return { ok: true, errorMessage: null };
 }
