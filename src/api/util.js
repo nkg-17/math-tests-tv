@@ -9,7 +9,6 @@ export default function createTestFromDesc(desc) {
 	test.tags = desc.tags;
 
 	test.problem.text = desc?.problem?.text;
-	test.problem.picture = desc?.problem?.picture;
 	if (desc?.problem?.answer) {
 		if (typeof(desc?.problem?.answer) === typeof("")) {
 			test.problem.answer.type = MathTest.AnswerType.String;
@@ -30,9 +29,6 @@ export default function createTestFromDesc(desc) {
 	else {
 		test.solution.answer = desc?.solution?.answer;
 	}
-	test.solution.picture = (desc?.solution?.picture) 
-		? desc?.solution?.picture
-		: desc?.problem?.picture;
 
 	return test;
 }

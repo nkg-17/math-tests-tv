@@ -36,6 +36,16 @@ export default class GithubTestsAPI {
 		).then(() => tests);
 	}
 
+	static requestRandomId(excludeIds = []) {
+		return this.requestIdList().then(
+			(ids) => {
+				ids = ids.filter((id) => !excludeIds.includes(id));
+				const i = Math.floor(Math.random() * (ids.length));
+				return ids[i];
+			}
+		);
+	}
+
 
 	static _wasTestCached(testId) {
 		return this.cache[testId] !== undefined;
@@ -75,25 +85,4 @@ export default class GithubTestsAPI {
 			path: path
 		});
 	}
-
-	/*
-	static _requestPictureURL(testId, picName) {
-		return new Promise(async (resolve, reject) => {
-			let actualUrl = null;
-			await this._requestPath(`tests/${testId}/${picName}`).then(
-				(inf) => { actualUrl = inf['data']['download_url']; },
-				(error) => { 
-					console.error(`GET PROBLEM PIC ${testId}/${picName}. Error:`, error); 
-					let myError = new Error(error);
-					myError.cause = 'Test ' + testId;
-					reject(myError);
-				}
-			);
-			if (!actualUrl)
-				return;
-
-			resolve(actualUrl);
-		});
-	}
-	*/
 }

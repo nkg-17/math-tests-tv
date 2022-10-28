@@ -22,6 +22,7 @@ export default class TestsAPI {
 	static requestTest(testId) 	{ return this._Backend.requestTest(testId); }
 	static requestIdList() 		{ return this._Backend.requestIdList(); }
 	static requestTestList() 	{ return this._Backend.requestTestList(); }
+	static requestRandomId(excludeIds = []) { return this._Backend.requestRandomId(excludeIds); }
 }
 
 TestsAPI.SetBackend('github');

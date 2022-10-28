@@ -18,16 +18,34 @@ export default class LocalTestsAPI {
 	}
 
 	static requestTest(testId) {
-		return new Promise((resolve, reject) => resolve(this.Tests[testId]));
+		return new Promise((resolve, reject) => {
+			if (this.Tests[testId]) {
+				resolve(this.Tests[testId]);
+			}
+			else {
+				reject(`Задача ${testId} не найдена`);
+			}
+		});
 	}
 
 	static requestIdList() {
-		let array = [];
-		for (let id in this.Tests) array.push(id);
-		return Promise((resolve, reject) => resolve(array));
+		let ids = [];
+		for (let id in this.Tests) ids.push(id);
+		return new Promise((resolve, reject) => resolve(ids));
 	}
 
 	static requestTestList() {
 		return new Promise((resolve, reject) => resolve(this.Tests));
+	}
+
+	static requestRandomId(excludeIds = []) {
+		return new Promise(async (resolve, reject) => {
+			let arr = await this.requestIdList();
+			arr = arr.filter((id) => !excludeIds.includes(id));
+
+			const i = Math.floor(Math.random() * (arr.length));
+
+			resolve(arr[i]);
+		});
 	}
 }
