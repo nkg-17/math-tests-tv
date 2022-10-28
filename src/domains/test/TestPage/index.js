@@ -1,12 +1,14 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 import TestsAPI from '../../../api/TestsAPI';
 import Status from '../../../common/Status';
 
 import Loading from '../../../components/Loading';
 import Warning from '../../../components/Warning';
+
+import TestView from './TestView';
 
 
 export default function TestPage(props) {
@@ -38,28 +40,7 @@ export default function TestPage(props) {
 	useEffect(loadRandomTest, [params.id]);
 
 	if (status === Status.Ok) {
-		return (
-			<Container className="TestLayout">
-				<Row className="h-100 d-flex flex-column justify-content-between">
-					<Col className="">
-						<Container style={{textAlign: "left"}}>
-							<h4>Условие</h4>
-							<p>{test.current.id} {test.current.problem.text}</p>
-						</Container>
-					</Col>
-					<Col className="col-auto">
-						<Row className="d-flex flex-row justify-content-start">
-							<Col className="col-auto ms-auto">
-								<Button 
-								variant="outline-secondary">
-									Следующая задача
-								</Button>
-							</Col>
-						</Row>
-					</Col>
-				</Row>
-			</Container>
-		);
+		return (<TestView test={test.current}/>);
 	}
 	else if (status === Status.Failed) {
 		return (<Container><Warning heading="Ошибка" text={error.current.toString()}/></Container>);

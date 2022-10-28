@@ -6,7 +6,6 @@ import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 function Header(props) {
 	const ARCHIVE_URL = "https://github.com/nkg-17/math-tests-archive";
-	const ISSUES_URL = "https://github.com/nkg-17/math-tests/issues/new";
 	const REPO_URL = "https://github.com/nkg-17/math-tests";
 
 	return (
@@ -18,7 +17,7 @@ function Header(props) {
 			variant="light">
 			<Container fluid>
 					<LinkContainer to="/">
-						<Navbar.Brand>Стереометрия ЕГЭ</Navbar.Brand>
+						<Navbar.Brand>&ensp;Стереометрия ЕГЭ</Navbar.Brand>
 					</LinkContainer>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -27,7 +26,6 @@ function Header(props) {
 							<NavDropdown title="Справка">
 								<NavDropdown.Item href={ARCHIVE_URL}>Редактировать Задачи</NavDropdown.Item>
 								<NavDropdown.Divider />
-								<NavDropdown.Item href={ISSUES_URL}>Сообщить об ошибке</NavDropdown.Item>
 								<NavDropdown.Item href={REPO_URL}>Репозиторий проекта</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
