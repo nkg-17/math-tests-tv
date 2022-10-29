@@ -99,8 +99,8 @@ function checkProblem(test) {
 function checkSolution(test) {
 	const solution = test?.solution;
 	
-	if (!isSet(solution?.text)) 	return { ok: false, errorMessage: `'solution.text' is undefined` };
-	if (solution?.text === "") 		return { ok: false, errorMessage: `'solution.text' is defined but empty` };
+	if (isSet(solution?.text))
+		if (!eqType(solution?.text, "")) return { ok: false, errorMessage: `'solution.text' is not a string` };
 	if (!isSet(solution?.answer)) 	return { ok: false, errorMessage: `'solution.answer' is undefined` };
 
 	return { ok: true, errorMessage: null };
@@ -114,7 +114,6 @@ function checkProblemAnswer(test) {
 	if (answer?.type === MathTest.AnswerType.String) {
 		if (!isSet(answer?.placeholder)) 		return { ok: false, errorMessage: `'problem.answer.placeholder' is undefined` };
 		if (!eqType(answer?.placeholder, ""))	return { ok: false, errorMessage: `'problem.answer.placeholder' is not a string` };
-		if (answer?.placeholder === "")			return { ok: false, errorMessage: `'problem.answer.placeholder' is defined but empty` };
 	}
 	else if (answer?.type === MathTest.AnswerType.Choise) {
 		if (!isSet(answer?.choises)) 		return { ok: false, errorMessage: `'problem.answer.choises' is undefined` };

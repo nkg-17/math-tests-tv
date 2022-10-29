@@ -48,7 +48,7 @@ function TestFooter(props) {
 				<Container className="TestFooter mt-4 py-3 px-5 d-flex justify-content-end">
 					<Row className="gx-3">
 						<Col className="col-auto">
-							<Form.Control placeholder="Ответ" />
+							<Form.Control placeholder={props.test.problem.answer.placeholder} />
 						</Col>
 						<Col className="col-auto">
 							<Button variant="success">Проверить</Button>
@@ -72,7 +72,7 @@ function TestBodyProblem(props) {
 	return (
 		<Col className="col-auto debug-outline">
 			<Container className="TestTextContainer px-4 py-3">
-				{props.test.problem.text}
+				&emsp;{props.test.problem.text}
 			</Container>
 		</Col>
 	);

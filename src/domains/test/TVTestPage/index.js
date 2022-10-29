@@ -19,7 +19,6 @@ export default function TVTestPage(props) {
 		).then(
 			(newTest) => {
 				test.current = newTest;
-				console.log(newTest.id);
 				error.current = null;
 				setStatus(Status.Ok);
 			}

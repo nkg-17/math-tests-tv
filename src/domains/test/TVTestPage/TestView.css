@@ -15,7 +15,10 @@
 	height: 45vh;
 	max-height: 45vh;
 
-	font-size: 1rem;
+	font-size: 1.05rem;
+	letter-spacing: normal;
+	word-spacing: 0.25rem;
+
 	text-align: left;
 	line-height: 1.5rem;
 
