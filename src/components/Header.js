@@ -3,6 +3,8 @@ import React, { memo } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
+import RoutePaths from '../constants/RoutePaths';
+
 
 function Header(props) {
 	const ARCHIVE_URL = "https://github.com/nkg-17/math-tests-archive";
@@ -16,7 +18,7 @@ function Header(props) {
 			expand="md"
 			variant="light">
 			<Container fluid>
-					<LinkContainer to="/">
+					<LinkContainer to={RoutePaths.ROOT}>
 						<Navbar.Brand>&ensp;Стереометрия ЕГЭ</Navbar.Brand>
 					</LinkContainer>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -25,7 +27,6 @@ function Header(props) {
 						<Nav className="me-auto">
 							<NavDropdown title="Справка">
 								<NavDropdown.Item href={ARCHIVE_URL}>Редактировать Задачи</NavDropdown.Item>
-								<NavDropdown.Divider />
 								<NavDropdown.Item href={REPO_URL}>Репозиторий проекта</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>

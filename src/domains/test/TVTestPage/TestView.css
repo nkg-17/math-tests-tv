@@ -1,0 +1,33 @@
+
+.debug-outline {
+	/*border: solid gray;*/
+	border: none;
+	border-width: 1px;
+}
+
+
+.TestHeader {
+	color: var(--bs-gray);
+}
+
+.TestTextContainer {
+	width: 55vw;
+	height: 45vh;
+	max-height: 45vh;
+
+	font-size: 1rem;
+	text-align: left;
+	line-height: 1.5rem;
+
+	overflow-y: scroll;
+
+	border-radius: 15px;
+	background-color: var(--bs-gray-100);
+}
+
+.TestFooter {
+	width: 55vw;
+
+	border-radius: 15px;
+	background-color: var(--bs-gray-100);
+}

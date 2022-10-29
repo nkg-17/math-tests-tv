@@ -4,6 +4,7 @@ import {
 	Container, Alert
 } from 'react-bootstrap';
 
+import RoutePaths from '../../constants/RoutePaths';
 
 function ErrorPage(props) {
 	return (
@@ -11,7 +12,7 @@ function ErrorPage(props) {
 			<Alert variant="danger">
 				<Alert.Heading>Ошибка</Alert.Heading>
 				<p>
-					<LinkContainer to="/"><Alert.Link>Вернуться на Главную страницу</Alert.Link></LinkContainer>
+					<LinkContainer to={RoutePaths.ROOT}><Alert.Link>Вернуться на Главную страницу</Alert.Link></LinkContainer>
 				</p>
 			</Alert>
 		</Container>

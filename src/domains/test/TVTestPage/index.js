@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import { Container } from 'react-bootstrap';
 
@@ -11,7 +10,7 @@ import Warning from '../../../components/Warning';
 import TestView from './TestView';
 
 
-export default function TestPage(props) {
+export default function TVTestPage(props) {
 
 	function loadRandomTest() {
 		TestsAPI.requestRandomId(
@@ -32,20 +31,20 @@ export default function TestPage(props) {
 		);
 	}
 
-	const params = useParams();
 	let test	= useRef(null);
 	let error	= useRef(null);
 	const [ status, setStatus ] = useState(Status.Waiting);
 
-	useEffect(loadRandomTest, [params.id]);
+	useEffect(loadRandomTest, []);
 
-	if (status === Status.Ok) {
-		return (<TestView test={test.current}/>);
-	}
-	else if (status === Status.Failed) {
-		return (<Container><Warning heading="Ошибка" text={error.current.toString()}/></Container>);
-	}
-	else {
-		return (<div className="mt-auto mb-auto"><Loading /></div>);
+	switch (status) {
+		case Status.Ok:
+			return (<TestView test={test.current}/>);
+
+		case Status.Failed:
+			return (<Container><Warning heading="Ошибка" text={error.current.toString()}/></Container>);
+
+		default:
+			return (<div className="mt-auto mb-auto"><Loading /></div>);
 	}
 }
