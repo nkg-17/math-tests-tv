@@ -1,5 +1,15 @@
 # Заметки
 
+### Цветовая палитра
+- **Omega Yeast** ![](https://placehold.co/15x15/f7f7f7/f7f7f7.png)![](https://placehold.co/15x15/7da2a9/7da2a9.png)
+- **Jebsen Careers** ![](https://placehold.co/15x15/3fd2c7/3fd2c7.png)![](https://placehold.co/15x15/99ddff/99ddff.png)![](https://placehold.co/15x15/00458b/00458b.png)
+- **Jebsen Careers** ![](https://placehold.co/15x15/150734/150734.png)![](https://placehold.co/15x15/0f2557/0f2557.png)![](https://placehold.co/15x15/28559a/28559a.png)![](https://placehold.co/15x15/3778c2/3778c2.png)![](https://placehold.co/15x15/4b9fe1/4b9fe1.png)![](https://placehold.co/15x15/63bce5/63bce5.png)![](https://placehold.co/15x15/7ed5ea/7ed5ea.png)
+- **Fresh and Relaxed** ![](https://placehold.co/15x15/25395C/25395C.png)![](https://placehold.co/15x15/2787EA/2787EA.png)![](https://placehold.co/15x15/1C67D2/1C67D2.png)![](https://placehold.co/15x15/A4B0FF/A4B0FF.png)![](https://placehold.co/15x15/EA7166/EA7166.png)![](https://placehold.co/15x15/FCA78A/FCA78A.png)
+- **Pastel and Muted** ![](https://placehold.co/15x15/242333/242333.png)![](https://placehold.co/15x15/FFFFFF/FFFFFF.png)![](https://placehold.co/15x15/01B0D3/01B0D3.png)
+- **Canatal** ![](https://placehold.co/15x15/182978/182978.png)![](https://placehold.co/15x15/6688cc/6688cc.png)![](https://placehold.co/15x15/acbfe6/acbfe6.png)
+- **Awink** ![](https://placehold.co/15x15/212221/212221.png)![](https://placehold.co/15x15/1181b2/1181b2.png)![](https://placehold.co/15x15/ddedf4/ddedf4.png)![](https://placehold.co/15x15/44449b/44449b.png)
+- **Monochromatic** ![](https://placehold.co/15x15/292929/292929.png)![](https://placehold.co/15x15/616161/616161.png)![](https://placehold.co/15x15/FFFFFF/FFFFFF.png)
+
 ### Полезные ссылки
 - [React Turorial](https://www.youtube.com/playlist?list=PLVfMKQXDAhGWamOcqqIsMAbsP6pl0vUtW)
 - [React](https://reactjs.org/docs/getting-started.html)
