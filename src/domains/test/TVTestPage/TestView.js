@@ -1,6 +1,7 @@
 
 import './TestView.css';
 
+import ColorPalette from '../../../constants/ColorPalette';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 
@@ -19,10 +20,10 @@ export default TestView;
 
 function TestHeader(props) {
 	return (
-		<Row className="TestHeaderdebug-outline pb-5">
+		<Row className="TestHeaderdebug-outline pt-5 pb-5">
 			<Col>
 				<div className="TestHeader">
-					<h5>{props.test.title}</h5>
+					<h2 style={{color: ColorPalette.textPrimary}}>{props.test.title}</h2>
 				</div>
 			</Col>
 		</Row>
@@ -45,13 +46,15 @@ function TestFooter(props) {
 	return (
 		<Row className="debug-outline">
 			<Col>
-				<Container className="TestFooter mt-4 py-3 px-5 d-flex justify-content-end">
+				<Container 
+				className="TestFooter py-3 px-5 d-flex justify-content-end"
+				style={{backgroundColor: ColorPalette.secondary}}>
 					<Row className="gx-3">
 						<Col className="col-auto">
-							<Form.Control placeholder={props.test.problem.answer.placeholder} />
+							<Form.Control size="lg" placeholder={props.test.problem.answer.placeholder} />
 						</Col>
 						<Col className="col-auto">
-							<Button variant="success">Проверить</Button>
+							<Button size="lg" variant="success">Проверить</Button>
 						</Col>
 					</Row>
 				</Container>
@@ -71,7 +74,9 @@ function TestBodySwipeButton(props) {
 function TestBodyProblem(props) {
 	return (
 		<Col className="col-auto debug-outline">
-			<Container className="TestTextContainer px-4 py-3">
+			<Container 
+			className="TestTextContainer px-4 py-3"
+			style={{backgroundColor: ColorPalette.secondary, color: ColorPalette.textSecondary}}>
 				&emsp;{props.test.problem.text}
 			</Container>
 		</Col>
@@ -85,8 +90,8 @@ function SwipeButton(props) {
 
 	return (
 		<Button 
-		variant="light">
-			<img 
+		variant={ColorPalette.button}>
+			<img
 			src={`arrow-right.svg`} 
 			style={style}
 			alt=""/>

@@ -5,32 +5,27 @@
 	border-width: 1px;
 }
 
-
-.TestHeader {
-	color: var(--bs-gray);
-}
-
 .TestTextContainer {
 	width: 55vw;
 	height: 45vh;
 	max-height: 45vh;
 
 	font-size: 1.05rem;
-	letter-spacing: normal;
-	word-spacing: 0.25rem;
+	letter-spacing: -0.03rem;
+	word-spacing: 0.2rem;
 
 	text-align: left;
 	line-height: 1.5rem;
 
 	overflow-y: scroll;
 
-	border-radius: 15px;
-	background-color: var(--bs-gray-100);
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
 }
 
 .TestFooter {
 	width: 55vw;
 
-	border-radius: 15px;
-	background-color: var(--bs-gray-100);
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 }

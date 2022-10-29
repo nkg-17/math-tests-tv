@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
+import ColorPalette from '../constants/ColorPalette';
 import RoutePaths from '../constants/RoutePaths';
 
 
@@ -16,7 +17,7 @@ function Header(props) {
 			style={{position: "sticky"}} 
 			collapseOnSelect 
 			expand="md"
-			variant="light">
+			variant={ColorPalette.navbar}>
 			<Container fluid>
 					<LinkContainer to={RoutePaths.ROOT}>
 						<Navbar.Brand>&ensp;Стереометрия ЕГЭ</Navbar.Brand>
