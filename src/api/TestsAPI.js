@@ -1,3 +1,4 @@
+
 import GithubTestsAPI from './GithubTestsAPI';
 import LocalTestsAPI from './LocalTestsAPI';
 
@@ -23,6 +24,8 @@ export default class TestsAPI {
 	static requestIdList() 		{ return this._Backend.requestIdList(); }
 	static requestTestList() 	{ return this._Backend.requestTestList(); }
 	static requestRandomId(excludeIds = []) { return this._Backend.requestRandomId(excludeIds); }
+	static requestNextIdFor(testId) { return this._Backend.requestNextIdFor(testId); }
+	static requestPrevIdFor(testId) { return this._Backend.requestPrevIdFor(testId); }
 }
 
-TestsAPI.SetBackend('github');
+TestsAPI.SetBackend('local');

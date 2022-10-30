@@ -48,4 +48,29 @@ export default class LocalTestsAPI {
 			resolve(arr[i]);
 		});
 	}
+
+	static requestNextIdFor(testId) {
+		return this._requestShiftIdFor(testId, 1);
+	}
+
+	static requestPrevIdFor(testId) {
+		return this._requestShiftIdFor(testId, -1);
+	}
+
+	static _requestShiftIdFor(testId, shift) {
+		return new Promise(async (resolve, reject) => {
+			let arr = await this.requestIdList();
+			let i = arr.indexOf(testId);
+
+			if (i === -1) {
+				reject(`Could not request next/prev test ID for ${testId}`);
+				return;
+			}
+
+			i = (i + shift) % arr.length;
+			i = (i < 0) ? arr.length + i : i;
+
+			resolve(arr[i]);
+		});
+	}
 }
