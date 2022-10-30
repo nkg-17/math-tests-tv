@@ -6,10 +6,12 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 
 function TestView(props) {
+	const onTestChange = props.onTestChange ?? ((shift)=>{});
+
 	return (
 		<Container fluid>
 			<TestHeader test={props.test} />
-			<TestBody 	test={props.test} />
+			<TestBody 	test={props.test} onTestChange={onTestChange} />
 			<TestFooter test={props.test} />
 		</Container>
 	);
@@ -33,11 +35,9 @@ function TestHeader(props) {
 function TestBody(props) {
 	return (
 		<Row className="d-flex justify-content-center debug-outline">
-			<TestBodySwipeButton direction="left" />
-
+			<TestBodySwipeButton direction="left" onClick={() => props.onTestChange(-1)} />
 			<TestBodyProblem test={props.test} />
-
-			<TestBodySwipeButton direction="right" />
+			<TestBodySwipeButton direction="right" onClick={() => props.onTestChange(1)} />
 		</Row>
 	);
 }
@@ -66,7 +66,7 @@ function TestFooter(props) {
 function TestBodySwipeButton(props) {
 	return (
 		<Col className="col-auto d-flex flex-column justify-content-center debug-outline">
-			<SwipeButton direction={props.direction} />
+			<SwipeButton direction={props.direction} onClick={props.onClick} />
 		</Col>
 	);
 }
@@ -94,7 +94,8 @@ function SwipeButton(props) {
 			<img
 			src={`arrow-right.svg`} 
 			style={style}
-			alt=""/>
+			alt=""
+			onClick={props.onClick}/>
 		</Button>
 	);
 }

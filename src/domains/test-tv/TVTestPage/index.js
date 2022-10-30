@@ -30,6 +30,32 @@ export default function TVTestPage(props) {
 		);
 	}
 
+	function loadTestWithShift(shift) {
+		if (status === Status.Waiting)
+			return;
+
+		const idReq = (shift > 0) 
+			? TestsAPI.requestNextIdFor(test.current.id) 
+			: TestsAPI.requestPrevIdFor(test.current.id);
+
+		idReq.then(
+			(nextId) => TestsAPI.requestTest(nextId)
+		).then(
+			(newTest) => {
+				test.current = newTest;
+				error.current = null;
+				setStatus(Status.Ok);
+			}
+		).catch(
+			(reqError) => {
+				error.current = reqError;
+				setStatus(Status.Failed);
+			}
+		);
+
+		setStatus(Status.Waiting);
+	}
+
 	let test	= useRef(null);
 	let error	= useRef(null);
 	const [ status, setStatus ] = useState(Status.Waiting);
@@ -38,7 +64,7 @@ export default function TVTestPage(props) {
 
 	switch (status) {
 		case Status.Ok:
-			return (<TestView test={test.current}/>);
+			return (<TestView test={test.current} onTestChange={loadTestWithShift}/>);
 
 		case Status.Failed:
 			return (<Container><Warning heading="Ошибка" text={error.current.toString()}/></Container>);
