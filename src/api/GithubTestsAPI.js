@@ -67,8 +67,6 @@ export default class GithubTestsAPI {
 			i = (i + shift) % arr.length;
 			i = (i < 0) ? arr.length + i : i;
 			
-			console.log(`requested shifted ID ${shift} for ${testId}: ${i}`);
-
 			resolve(arr[i]);
 		});
 	}

@@ -28,4 +28,4 @@ export default class TestsAPI {
 	static requestPrevIdFor(testId) { return this._Backend.requestPrevIdFor(testId); }
 }
 
-TestsAPI.SetBackend('local');
+TestsAPI.SetBackend('github');
