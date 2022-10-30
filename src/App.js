@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import RoutePaths from './constants/RoutePaths';
 import ColorPalette from './constants/ColorPalette';
 
-import TVTestPage from	'./domains/test/TVTestPage';
+import TVTestPage from	'./domains/test-tv/TVTestPage';
 import ErrorPage from 	'./domains/error/ErrorPage';
 
 
