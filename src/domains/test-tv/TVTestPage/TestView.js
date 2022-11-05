@@ -6,7 +6,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 
 function TestView(props) {
-	const onTestChange = props.onTestChange ?? ((shift)=>{});
+	const onTestChange = props.onTestChange ?? ((shift) => {});
 
 	return (
 		<Container fluid>
