@@ -1,75 +1,83 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Container } from 'react-bootstrap';
+import { 
+	useState, 
+	useEffect, 
+	useRef
+} from 'react';
 
 import TestsAPI from '../../../api/TestsAPI';
 import Status from '../../../common/Status';
 
 import Loading from '../../../components/Loading';
-import Warning from '../../../components/Warning';
-
-import TestView from './TestView';
+import TestPage from './TestPage';
+import TestContext from './TestContext';
 
 
 export default function TVTestPage(props) {
+	const [ test, setTest ] = useState(null);
+	const [ answerState, setAnswerState ] = useState("neutral"); // valid, invalid, gave-up
+	let error	= useRef(null);
+	let status 	= useRef(Status.Waiting);
 
-	function loadRandomTest() {
-		TestsAPI.requestRandomId(
-		).then(
-			(nextId) => TestsAPI.requestTest(nextId)
-		).then(
-			(newTest) => {
-				test.current = newTest;
-				error.current = null;
-				setStatus(Status.Ok);
-			}
-		).catch(
-			(reqError) => {
-				error.current = reqError;
-				setStatus(Status.Failed);
-			}
-		);
-	}
-
-	function loadTestWithShift(shift) {
-		if (status === Status.Waiting)
+	const loadTestById = (id) => {
+		if (status.current === Status.Waiting)
 			return;
 
-		const idReq = (shift > 0) 
-			? TestsAPI.requestNextIdFor(test.current.id) 
-			: TestsAPI.requestPrevIdFor(test.current.id);
+		status.current = Status.Waiting;
+		error.current = null;
+		setTest(() => null);
+		setAnswerState(() => "neutral");
 
-		idReq.then(
-			(nextId) => TestsAPI.requestTest(nextId)
-		).then(
-			(newTest) => {
-				test.current = newTest;
+		setTimeout(() => {
+			TestsAPI.requestTest(id)
+			.then((newTest) => {
 				error.current = null;
-				setStatus(Status.Ok);
-			}
-		).catch(
-			(reqError) => {
-				error.current = reqError;
-				setStatus(Status.Failed);
-			}
-		);
-
-		setStatus(Status.Waiting);
+				status.current = Status.Ok;
+				setTest(() => newTest);
+			})
+			.catch((err) => {
+				console.error(err);
+				error.current = err;
+				status.current = Status.Failed;
+				setTest(() => null);
+			});
+		}, 100);
 	}
 
-	let test	= useRef(null);
-	let error	= useRef(null);
-	const [ status, setStatus ] = useState(Status.Waiting);
+	const contextValue = {
+		test: test,
+		answerState: answerState,
+		doneAnswering: ['valid', 'gave-up'].includes(answerState),
+		submitAnswer: (answer) => setAnswerState(answer === test.solution.answer ? "valid" : "invalid"),
+		openSolution: () => setAnswerState("gave-up"),
+		loadPrevTest: () => TestsAPI.requestPrevIdFor(test.id).then((id) => loadTestById(id)),
+		loadNextTest: () => TestsAPI.requestNextIdFor(test.id).then((id) => loadTestById(id))
+	};
 
-	useEffect(loadRandomTest, []);
+	useEffect(() => {
+		TestsAPI.requestRandomId()
+		.then((id) => TestsAPI.requestTest(id)).then((newTest) => {
+			error.current = null;
+			status.current = Status.Ok;
+			setTest(() => newTest);
+			setAnswerState(() => "neutral");
+		}).catch((err) => {
+			console.error(err);
+			error.current = err;
+			status.current = Status.Failed;
+			setTest(() => null);
+			setAnswerState(() => "neutral");
+		});
+	}, []);
 
-	switch (status) {
-		case Status.Ok:
-			return (<TestView test={test.current} onTestChange={loadTestWithShift}/>);
-
-		case Status.Failed:
-			return (<Container><Warning heading="Ошибка" text={error.current.toString()}/></Container>);
-
-		default:
-			return (<div className="mt-auto mb-auto"><Loading /></div>);
-	}
+	return (
+		<TestContext.Provider value={contextValue}>
+			{ 
+				(status.current === Status.Ok) ? (
+					<TestPage />
+				) : (
+					<div className="mt-auto mb-auto"><Loading /></div>
+				)
+			}
+		</TestContext.Provider>
+	);
 }
