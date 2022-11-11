@@ -1,0 +1,11 @@
+
+.TestSubmitForm {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	column-gap: 1rem;
+}
+
+.TestSubmitFormInput {
+	width: 17rem;
+}

@@ -1,0 +1,19 @@
+
+.TestHeader {
+	text-align: left;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.TestHeaderTitle {
+	color: var(--bs-gray-700);
+}
+
+.TestHeaderIcon {
+	margin-right: 0.7rem;
+}
+
+.TestHeaderHelp {
+	font-size: 1rem;
+}

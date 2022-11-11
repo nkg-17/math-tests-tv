@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Dropdown, Button } from 'react-bootstrap';
 
 
@@ -46,4 +46,4 @@ function NamedDropdown(props) {
 	);
 }
 
-export default NamedDropdown;
+export default memo(NamedDropdown);

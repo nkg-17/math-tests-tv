@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
 	InputGroup,
 	Form
@@ -19,4 +19,4 @@ function SearchBar(props) {
 	);
 }
 
-export default SearchBar;
+export default memo(SearchBar);

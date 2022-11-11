@@ -1,0 +1,63 @@
+{
+	"85018": {
+		"id": "85018",
+		"title": "Test 85018",
+		"tags": [ "tag0", "tag1" ],
+
+		"problem": {
+			"text": "85018 text",
+			"answer": "Enter the answer"
+		},
+
+		"solution": {
+			"text": "Solution text",
+			"answer": "123"
+		}
+	},
+	"1142": {
+		"id": "1142",
+		"title": "Test 1142",
+
+		"problem": {
+			"text": "1142 Problem text",
+			"answer": [ "Oranges", "Apples" ]
+		},
+
+		"tips": [ "Tip 1", "Tip 2" ],
+
+		"solution": {
+			"text": "Solution text",
+			"answer": 1
+		}
+	},
+	"732": {
+		"id": "732",
+		"title": "Test 732",
+		"tags": [ "tag0", "fruits" ],
+
+		"problem": {
+			"text": "732 Problem text",
+			"answer": [ "Oranges", "Apples" ]
+		},
+
+		"solution": {
+			"text": "Solution text",
+			"answer": 1
+		}
+	},
+	"5690": {
+		"id": "5690",
+		"title": "Test 5690",
+		"tags": [ "tag0", "tag1" ],
+
+		"problem": {
+			"text": "5690 text",
+			"answer": "Enter the answer"
+		},
+
+		"solution": {
+			"text": "Solution text",
+			"answer": "123"
+		}
+	}
+}
