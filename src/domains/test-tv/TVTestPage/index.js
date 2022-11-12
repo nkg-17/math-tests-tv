@@ -5,7 +5,6 @@ import {
 } from 'react';
 
 import TestsAPI from '../../../api/TestsAPI';
-import Status from '../../../common/Status';
 
 import Loading from '../../../components/Loading';
 import TestPage from './TestPage';
@@ -15,32 +14,26 @@ import TestContext from './TestContext';
 export default function TVTestPage(props) {
 	const [ test, setTest ] = useState(null);
 	const [ answerState, setAnswerState ] = useState("neutral"); // valid, invalid, gave-up
-	let error	= useRef(null);
-	let status 	= useRef(Status.Waiting);
+	let status 	= useRef("waiting");
 
 	const loadTestById = (id) => {
-		if (status.current === Status.Waiting)
+		if (status.current === "waiting")
 			return;
 
-		status.current = Status.Waiting;
-		error.current = null;
+		status.current = "waiting";
 		setTest(() => null);
 		setAnswerState(() => "neutral");
 
-		setTimeout(() => {
-			TestsAPI.requestTest(id)
-			.then((newTest) => {
-				error.current = null;
-				status.current = Status.Ok;
-				setTest(() => newTest);
-			})
-			.catch((err) => {
-				console.error(err);
-				error.current = err;
-				status.current = Status.Failed;
-				setTest(() => null);
-			});
-		}, 100);
+		TestsAPI.requestTest(id)
+		.then((newTest) => {
+			status.current = "ok";
+			setTest(() => newTest);
+		})
+		.catch((err) => {
+			console.error(err);
+			status.current = "failed";
+			setTest(() => null);
+		});
 	}
 
 	const contextValue = {
@@ -56,14 +49,12 @@ export default function TVTestPage(props) {
 	useEffect(() => {
 		TestsAPI.requestRandomId()
 		.then((id) => TestsAPI.requestTest(id)).then((newTest) => {
-			error.current = null;
-			status.current = Status.Ok;
+			status.current = "ok";
 			setTest(() => newTest);
 			setAnswerState(() => "neutral");
 		}).catch((err) => {
 			console.error(err);
-			error.current = err;
-			status.current = Status.Failed;
+			status.current = "failed";
 			setTest(() => null);
 			setAnswerState(() => "neutral");
 		});
@@ -72,7 +63,7 @@ export default function TVTestPage(props) {
 	return (
 		<TestContext.Provider value={contextValue}>
 			{ 
-				(status.current === Status.Ok) ? (
+				(status.current === "ok") ? (
 					<TestPage />
 				) : (
 					<div className="mt-auto mb-auto"><Loading /></div>

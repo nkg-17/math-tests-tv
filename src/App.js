@@ -5,7 +5,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import RoutePaths from './constants/RoutePaths';
-import ColorPalette from './constants/ColorPalette';
 
 import TVTestPage from	'./domains/test-tv/TVTestPage';
 import ErrorPage from 	'./domains/error/ErrorPage';
@@ -13,7 +12,7 @@ import ErrorPage from 	'./domains/error/ErrorPage';
 
 export default function App() {
 	return (
-		<div className="App" style={{backgroundColor: ColorPalette.background}}>
+		<div className="App">
 			<Router basename={process.env.PUBLIC_URL}>
 					<Routes>
 						<Route exact path={RoutePaths.ROOT} element={ <Navigate to={RoutePaths.TEST_TV} /> } />
