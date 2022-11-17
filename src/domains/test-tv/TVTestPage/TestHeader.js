@@ -1,16 +1,21 @@
 
 import './TestHeader.css';
 
+import { useContext } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
+import TestContext from './TestContext';
+
 function TestHeader(props) {
+	const context = useContext(TestContext);
+
 	return (
 		<div className="TestHeader">
 			<h3 className="TestHeaderTitle">
 				<Row className="justify-content-between">
 					<Col className="col-auto">
 						<i className="TestHeaderIcon bi bi-pencil" />
-						{props.title}
+						{context.test.title}
 					</Col>
 				</Row>
 			</h3>

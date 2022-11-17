@@ -1,24 +1,35 @@
+import React, { useContext } from 'react';
+import { Container } from 'react-bootstrap';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import { useContext } from 'react';
-import { Row } from 'react-bootstrap';
+import TestPanel 	from './TestPanel';
+import Loading 		from '../../../components/Loading';
 
-import TestPanel 		from './TestPanel';
-import TestSwipeButton 	from './TestSwipeButton';
-import TestContainer 	from './TestContainer';
+import TestContext 	from './TestContext';
 
-import TestContext from './TestContext';
-
-
-function TestPage(props) {
+function TestPage() {
 	const context = useContext(TestContext);
 	return (
-		<TestContainer>
-			<Row className="d-flex justify-content-center">				
-				<TestSwipeButton direction="left" onClick={context.loadPrevTest} />
-				<TestPanel test={context.test} />
-				<TestSwipeButton direction="right" onClick={context.loadNextTest} />
-			</Row>
-		</TestContainer>
+		<>
+			{ (context.status !== 'ok') && 
+				<div style={{position: "absolute", top: "50vh", left: "50vw"}}>
+					<Loading />
+				</div>
+			}
+			<Container fluid className="mt-auto mb-auto" style={{textAlign: "center"}}>
+				<AnimatePresence>
+					{
+						(context.status === 'ok') && 
+						<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1, transition: { when: "beforeChildren" } }}
+						exit={{ opacity: 0 }}>
+							<TestPanel />
+						</motion.div>
+					}
+				</AnimatePresence>
+			</Container>
+		</>
 	);
 }
 

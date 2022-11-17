@@ -11,9 +11,35 @@ function TestSubmitForm(props) {
 	const context = useContext(TestContext);
 	const textInput = useRef(null);
 
-	const onClick = () => {
+	const onNext = () => {
+		context.loadNextTest();
+		textInput.current.value = "";
+	};
+
+	const onSubmit = () => {
 		context.submitAnswer(textInput.current.value);
 	};
+
+	const submitButton = (
+		<Button 
+		variant="success"
+		type="button" 
+		size="lg"
+		onClick={onSubmit}>
+			Ответить
+		</Button>
+	);
+
+	const nextButton = (
+		<Button 
+		variant="primary"
+		type="button" 
+		size="lg"
+		style={{color: "white"}}
+		onClick={onNext}>
+			Следующая
+		</Button>
+	);
 	
 	if (context.doneAnswering)
 		textInput.current.value = context.test.solution.answer;
@@ -39,14 +65,7 @@ function TestSubmitForm(props) {
 					size="lg"  
 					placeholder={props.placeholder} 
 					type="text" disabled={context.doneAnswering}/>
-					<Button 
-					variant="success" 
-					type="button" 
-					size="lg"
-					disabled={context.doneAnswering}
-					onClick={onClick}>
-						Ответить
-					</Button>
+					{context.doneAnswering ? nextButton : submitButton}
 				</Stack>
 			</Col>
 		</>
