@@ -41,7 +41,7 @@ export default function TVTestPage(props) {
 		status: status,
 
 		answerState: answerState,
-		doneAnswering: ['valid', 'gave-up'].includes(answerState),
+		isDoneAnswering: ['valid', 'gave-up'].includes(answerState),
 
 		submitAnswer: (answer) => setAnswerState(answer === test.solution.answer ? "valid" : "invalid"),
 		openSolution: () => setAnswerState("gave-up"),

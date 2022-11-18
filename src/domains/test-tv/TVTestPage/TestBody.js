@@ -35,14 +35,16 @@ function TestBody(props) {
 						initial="initial" 
 						animate="animate" 
 						custom={{ delay: 0 }}
-						variants={fadeInMotion}>
+						variants={fadeInMotion}
+						className="TestBodyText">
 							Решение
 						</motion.h4>
 						<motion.p 
 						initial="initial" 
 						animate="animate" 
 						custom={{ delay: 0.1 }}
-						variants={fadeInMotion}>
+						variants={fadeInMotion}
+						className="TestBodyText">
 							{test.solution.text}
 						</motion.p>
 					</>
@@ -57,10 +59,11 @@ function TestBody(props) {
 			initial="initial" 
 			animate="animate" 
 			custom={{ delay: 0.2 }}
-			variants={fadeInMotion}>
+			variants={fadeInMotion}
+			className="TestBodyText">
 				{test.problem.text}
 			</motion.p>
-			{(context.doneAnswering) ? (solution) : (<></>)}
+			{(context.isDoneAnswering) ? (solution) : (<></>)}
 		</div>
 	);
 }

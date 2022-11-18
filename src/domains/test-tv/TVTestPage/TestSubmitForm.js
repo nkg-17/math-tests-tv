@@ -1,17 +1,19 @@
 
 import './TestSubmitForm.css';
 
-import { useRef, useContext } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { Col, Stack, Button, Form } from 'react-bootstrap';
 
 import TestContext from './TestContext';
 
 
 function TestSubmitForm(props) {
+	const [ isNextDisabled, setNextDisabled ] = useState(false);
 	const context = useContext(TestContext);
 	const textInput = useRef(null);
 
 	const onNext = () => {
+		setNextDisabled(() => true);
 		context.loadNextTest();
 	};
 
@@ -24,29 +26,32 @@ function TestSubmitForm(props) {
 		variant="success"
 		type="button" 
 		size="lg"
-		onClick={onSubmit}>
+		onClick={onSubmit}
+		className="TestSubmitFormButton">
 			Ответить
 		</Button>
 	);
 
 	const nextButton = (
 		<Button 
+		disabled={isNextDisabled}
 		variant="primary"
 		type="button" 
 		size="lg"
 		style={{color: "white"}}
-		onClick={onNext}>
+		onClick={onNext}
+		className="TestSubmitFormButton">
 			Следующая
 		</Button>
 	);
 	
-	if (context.doneAnswering)
+	if (context.isDoneAnswering)
 		textInput.current.value = context.test.solution.answer;
 
 	return (
 		<>
 			{
-				(!context.doneAnswering) ? (
+				(!context.isDoneAnswering) ? (
 					<Col className="col-auto">
 						<Button variant="light" size="lg" onClick={context.openSolution}>
 							<i className="text-muted bi bi-unlock" />
@@ -63,8 +68,8 @@ function TestSubmitForm(props) {
 					isInvalid={context.answerState === "invalid"}
 					size="lg"  
 					placeholder={props.placeholder} 
-					type="text" disabled={context.doneAnswering}/>
-					{context.doneAnswering ? nextButton : submitButton}
+					type="text" disabled={context.isDoneAnswering}/>
+					{context.isDoneAnswering ? nextButton : submitButton}
 				</Stack>
 			</Col>
 		</>
