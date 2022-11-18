@@ -12,7 +12,7 @@ function TestPage() {
 	return (
 		<>
 			{ (context.status !== 'ok') && 
-				<div style={{position: "absolute", top: "50vh", left: "50vw"}}>
+				<div style={{position: "absolute", top: "50vh", left: "50vw", transform: "translate(-50%, -50%)"}}>
 					<Loading />
 				</div>
 			}
