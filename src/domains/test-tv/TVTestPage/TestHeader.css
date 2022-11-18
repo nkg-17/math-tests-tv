@@ -8,7 +8,7 @@
 
 .TestHeaderTitle {
 	color: var(--bs-gray-700);
-	font-size: 2rem;
+	font-size: 1.5rem;
 }
 
 .TestHeaderIcon {
@@ -17,4 +17,5 @@
 
 .TestHeaderHelp {
 	font-size: 1rem;
+	color: var(--bs-gray-500);
 }

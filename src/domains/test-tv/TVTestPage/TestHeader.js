@@ -17,6 +17,14 @@ function TestHeader(props) {
 						<i className="TestHeaderIcon bi bi-pencil" />
 						{context.test.title}
 					</Col>
+					<Col className="col-auto">
+						<button 
+						className="btn TestHeaderHelp" 
+						type="button"
+						onClick={() => context.setErrorReportOpened(true)}>
+							<i className="bi bi-exclamation-triangle" />
+						</button>
+					</Col>
 				</Row>
 			</h3>
 		</div>

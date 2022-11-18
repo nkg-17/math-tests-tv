@@ -7,12 +7,14 @@ import {
 import TestsAPI from '../../../api/TestsAPI';
 
 import TestPage from './TestPage';
+
 import TestContext from './TestContext';
 
 
 export default function TVTestPage(props) {
 	const [ test, setTest ] = useState(null);
 	const [ answerState, setAnswerState ] = useState("neutral"); // valid, invalid, gave-up
+	const [ isErrorReportOpened, setErrorReportOpened ] = useState(false);
 	let status 	= useRef("waiting");
 
 	const loadTestById = (id) => {
@@ -33,7 +35,7 @@ export default function TVTestPage(props) {
 				status.current = "failed";
 				setTest(() => null);
 			});
-		}, 500);
+		}, 400);
 		
 	}
 
@@ -44,8 +46,12 @@ export default function TVTestPage(props) {
 		answerState: answerState,
 		doneAnswering: ['valid', 'gave-up'].includes(answerState),
 
+		isErrorReportOpened: isErrorReportOpened,
+		setErrorReportOpened: setErrorReportOpened,
+
 		submitAnswer: (answer) => setAnswerState(answer === test.solution.answer ? "valid" : "invalid"),
 		openSolution: () => setAnswerState("gave-up"),
+		
 		loadPrevTest: () => TestsAPI.requestPrevIdFor(test.id).then((id) => loadTestById(id)),
 		loadNextTest: () => TestsAPI.requestNextIdFor(test.id).then((id) => loadTestById(id))
 	};
