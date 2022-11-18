@@ -19,7 +19,8 @@ function TestBody(props) {
 			return {
 				y: 0, opacity: 1,
 				transition: {
-					delay: props.delay
+					delay: props.delay,
+					type: "tween"
 				}
 			};
 		}
