@@ -8,6 +8,7 @@
 
 .TestHeaderTitle {
 	color: var(--bs-gray-700);
+	font-size: 2rem;
 }
 
 .TestHeaderIcon {

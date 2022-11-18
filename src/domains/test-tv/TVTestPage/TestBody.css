@@ -1,16 +1,18 @@
 
 .TestBody {
-	height: 50vh;
-	max-height: 50vh;
+    height: 50vh;
+    max-height: 50vh;
 
-	font-size: 1.05rem;
-	letter-spacing: -0.03rem;
-	word-spacing: 0.2rem;
-
-	text-align: left;
-	line-height: 1.5rem;
-
-	overflow-y: scroll;
+    text-align: left;
+	
+	font-size: 1.3rem;
+    line-height: 1.5rem;
+    
+    letter-spacing: -.03rem;
+    word-spacing: .3rem;
+    
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .TestBody p:first-letter {
