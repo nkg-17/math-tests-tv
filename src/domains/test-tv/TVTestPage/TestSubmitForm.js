@@ -13,7 +13,6 @@ function TestSubmitForm(props) {
 
 	const onNext = () => {
 		context.loadNextTest();
-		textInput.current.value = "";
 	};
 
 	const onSubmit = () => {

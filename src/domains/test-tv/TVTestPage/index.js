@@ -1,7 +1,6 @@
 import { 
 	useState, 
-	useEffect, 
-	useRef
+	useEffect
 } from 'react';
 
 import TestsAPI from '../../../api/TestsAPI';
@@ -11,35 +10,35 @@ import TestContext from './TestContext';
 
 
 export default function TVTestPage(props) {
-	const [ test, setTest ] = useState(null);
-	const [ answerState, setAnswerState ] = useState("neutral"); // valid, invalid, gave-up
-	let status 	= useRef("waiting");
+	const [ test, setTest ] 				= useState(null);
+	const [ answerState, setAnswerState ] 	= useState("neutral"); // valid, invalid, gave-up
+	const [ status, setStatus ]				= useState("waiting");
 
 	const loadTestById = (id) => {
-		if (status.current === "waiting")
+		if (status === "waiting")
 			return;
 
-		status.current = "waiting";
-		setAnswerState(() => "neutral");
+		setStatus(() => "waiting");
 
 		setTimeout(() => {
 			TestsAPI.requestTest(id)
 			.then((newTest) => {
-				status.current = "ok";
+				setStatus(() => "ok");
 				setTest(() => newTest);
+				setAnswerState(() => "neutral");
 			})
 			.catch((err) => {
 				console.error(err);
-				status.current = "failed";
+				setStatus(() => "failed");
+				setAnswerState(() => "neutral");
 				setTest(() => null);
 			});
-		}, 500);
-		
+		}, 400);
 	}
 
 	const contextValue = {
 		test: test,
-		status: status.current,
+		status: status,
 
 		answerState: answerState,
 		doneAnswering: ['valid', 'gave-up'].includes(answerState),
@@ -53,12 +52,12 @@ export default function TVTestPage(props) {
 	useEffect(() => {
 		TestsAPI.requestRandomId()
 		.then((id) => TestsAPI.requestTest(id)).then((newTest) => {
-			status.current = "ok";
+			setStatus(() => "ok");
 			setTest(() => newTest);
 			setAnswerState(() => "neutral");
 		}).catch((err) => {
 			console.error(err);
-			status.current = "failed";
+			setStatus(() => "failed");
 			setTest(() => null);
 			setAnswerState(() => "neutral");
 		});
