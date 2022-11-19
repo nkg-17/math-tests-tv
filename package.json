@@ -1,8 +1,8 @@
 {
-  "name": "math-tests",
+  "name": "math-tests-tv",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nkg-17.github.io/math-tests",
+  "homepage": "https://nkg-17.github.io/math-tests-tv",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -27,7 +27,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -b gh-pages -f -m \"deploy to gh-pages\"",
-    "postdeploy": "echo Deployed to https://nkg-17.github.io/math-tests"
+    "postdeploy": "echo Deployed to https://nkg-17.github.io/math-tests-tv"
   },
   "eslintConfig": {
     "extends": [
