@@ -3,6 +3,9 @@ import { validateTest } from '../common/MathTest';
 import createTestFromDesc from './util';
 
 
+const REPO_NAME = "tv-tests-archive";
+const REPO_OWNER = "nkg-17";
+
 export default class GithubTestsAPI {
 	static OctokitAPI = null;
 	static cache = {};
@@ -71,7 +74,6 @@ export default class GithubTestsAPI {
 		});
 	}
 
-
 	static _wasTestCached(testId) {
 		return this.cache[testId] !== undefined;
 	}
@@ -105,8 +107,8 @@ export default class GithubTestsAPI {
 
 	static _requestPath(path) {
 		return this.OctokitAPI.request('GET /repos/{owner}/{repo}/contents/{path}', {
-			owner: 'nkg-17',
-			repo: 'math-tests-archive',
+			owner: REPO_OWNER,
+			repo: REPO_NAME,
 			path: path
 		});
 	}
