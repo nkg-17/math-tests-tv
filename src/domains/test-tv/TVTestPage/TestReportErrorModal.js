@@ -3,7 +3,6 @@ import './TestReportErrorModal.css';
 import { useContext } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import getErrorList from '../../../common/ErrorMonitor.js';
 import TestContext from './TestContext';
 
 
@@ -26,7 +25,6 @@ function TestReportErrorModal(props) {
 				<details>
 					<summary>Ошибки программы</summary>
 					<pre className="TestReportModalCode mt-1">
-						{ getErrorList().map((error) => { return formatError(error) + '\n'; }) }
 					</pre>
 				</details>
 				<button onClick={() => { eval("const b;") }}>error!</button>
@@ -36,8 +34,3 @@ function TestReportErrorModal(props) {
 }
 
 export default TestReportErrorModal;
-
-
-function formatError(error) {
-	return `${error.name}: "${error.message}"`;
-}
