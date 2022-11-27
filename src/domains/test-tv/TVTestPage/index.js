@@ -6,12 +6,14 @@ import {
 import TestsAPI from '../../../api/TestsAPI';
 
 import TestPage from './TestPage';
+
 import TestContext from './TestContext';
 
 
 export default function TVTestPage(props) {
-	const [ test, setTest ] 				= useState(null);
-	const [ answerState, setAnswerState ] 	= useState("neutral"); // valid, invalid, gave-up
+	const [ test, setTest ] = useState(null);
+	const [ answerState, setAnswerState ] = useState("neutral"); // valid, invalid, gave-up
+	const [ isErrorReportOpened, setErrorReportOpened ] = useState(false);
 	const [ status, setStatus ]				= useState("waiting");
 
 	const loadTestById = (id) => {
@@ -31,7 +33,6 @@ export default function TVTestPage(props) {
 				console.error(err);
 				setStatus(() => "failed");
 				setAnswerState(() => "neutral");
-				setTest(() => null);
 			});
 		}, 400);
 	}
@@ -43,10 +44,15 @@ export default function TVTestPage(props) {
 		answerState: answerState,
 		isDoneAnswering: ['valid', 'gave-up'].includes(answerState),
 
+		isErrorReportOpened: isErrorReportOpened,
+		setErrorReportOpened: setErrorReportOpened,
+
 		submitAnswer: (answer) => setAnswerState(answer === test.solution.answer ? "valid" : "invalid"),
 		openSolution: () => setAnswerState("gave-up"),
+		
 		loadPrevTest: () => TestsAPI.requestPrevIdFor(test.id).then((id) => loadTestById(id)),
-		loadNextTest: () => TestsAPI.requestNextIdFor(test.id).then((id) => loadTestById(id))
+		loadNextTest: () => TestsAPI.requestNextIdFor(test.id).then((id) => loadTestById(id)),
+		loadTest: (id) => loadTestById(id)
 	};
 
 	useEffect(() => {

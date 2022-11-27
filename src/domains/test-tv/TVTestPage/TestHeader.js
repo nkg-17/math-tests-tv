@@ -13,9 +13,17 @@ function TestHeader(props) {
 		<div className="TestHeader">
 			<h3 className="TestHeaderTitle">
 				<Row className="justify-content-between">
-					<Col className="col-auto">
+					<Col className="col-auto TestHeaderTitleText">
 						<i className="TestHeaderIcon bi bi-pencil" />
 						{context.test.title}
+					</Col>
+					<Col className="col-auto">
+						<button 
+						className="btn TestHeaderHelp" 
+						type="button"
+						onClick={() => context.setErrorReportOpened(true)}>
+							<i className="bi bi-exclamation-triangle" />
+						</button>
 					</Col>
 				</Row>
 			</h3>

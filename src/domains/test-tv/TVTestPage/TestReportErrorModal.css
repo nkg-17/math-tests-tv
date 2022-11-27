@@ -1,0 +1,18 @@
+
+
+.TestReportModalCode {
+	color: #adbac7;
+	background-color: #2d333b;
+
+	padding: 16px;
+	max-height: 17rem;
+	
+	font-size: 85%;
+	line-height: 1.45;
+	font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+
+	overflow: auto;
+	word-wrap: normal;
+	border-radius: 6px;
+	box-sizing: border-box;
+}
