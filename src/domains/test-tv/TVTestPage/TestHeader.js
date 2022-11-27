@@ -13,7 +13,7 @@ function TestHeader(props) {
 		<div className="TestHeader">
 			<h3 className="TestHeaderTitle">
 				<Row className="justify-content-between">
-					<Col className="col-auto">
+					<Col className="col-auto TestHeaderTitleText">
 						<i className="TestHeaderIcon bi bi-pencil" />
 						{context.test.title}
 					</Col>

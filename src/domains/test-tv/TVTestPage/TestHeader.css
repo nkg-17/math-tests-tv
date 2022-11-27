@@ -11,6 +11,10 @@
 	font-size: 1.5rem;
 }
 
+.TestHeaderTitleText {
+	pointer-events: none;
+}
+
 .TestHeaderIcon {
 	margin-right: 0.7rem;
 }

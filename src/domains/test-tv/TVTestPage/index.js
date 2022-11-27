@@ -1,7 +1,6 @@
 import { 
 	useState, 
-	useEffect, 
-	useRef
+	useEffect
 } from 'react';
 
 import TestsAPI from '../../../api/TestsAPI';
@@ -15,36 +14,35 @@ export default function TVTestPage(props) {
 	const [ test, setTest ] = useState(null);
 	const [ answerState, setAnswerState ] = useState("neutral"); // valid, invalid, gave-up
 	const [ isErrorReportOpened, setErrorReportOpened ] = useState(false);
-	let status 	= useRef("waiting");
+	const [ status, setStatus ]				= useState("waiting");
 
 	const loadTestById = (id) => {
-		if (status.current === "waiting")
+		if (status === "waiting")
 			return;
 
-		status.current = "waiting";
-		setAnswerState(() => "neutral");
+		setStatus(() => "waiting");
 
 		setTimeout(() => {
 			TestsAPI.requestTest(id)
 			.then((newTest) => {
-				status.current = "ok";
+				setStatus(() => "ok");
 				setTest(() => newTest);
+				setAnswerState(() => "neutral");
 			})
 			.catch((err) => {
 				console.error(err);
-				status.current = "failed";
-				setTest(() => null);
+				setStatus(() => "failed");
+				setAnswerState(() => "neutral");
 			});
 		}, 400);
-		
 	}
 
 	const contextValue = {
 		test: test,
-		status: status.current,
+		status: status,
 
 		answerState: answerState,
-		doneAnswering: ['valid', 'gave-up'].includes(answerState),
+		isDoneAnswering: ['valid', 'gave-up'].includes(answerState),
 
 		isErrorReportOpened: isErrorReportOpened,
 		setErrorReportOpened: setErrorReportOpened,
@@ -53,18 +51,19 @@ export default function TVTestPage(props) {
 		openSolution: () => setAnswerState("gave-up"),
 		
 		loadPrevTest: () => TestsAPI.requestPrevIdFor(test.id).then((id) => loadTestById(id)),
-		loadNextTest: () => TestsAPI.requestNextIdFor(test.id).then((id) => loadTestById(id))
+		loadNextTest: () => TestsAPI.requestNextIdFor(test.id).then((id) => loadTestById(id)),
+		loadTest: (id) => loadTestById(id)
 	};
 
 	useEffect(() => {
 		TestsAPI.requestRandomId()
 		.then((id) => TestsAPI.requestTest(id)).then((newTest) => {
-			status.current = "ok";
+			setStatus(() => "ok");
 			setTest(() => newTest);
 			setAnswerState(() => "neutral");
 		}).catch((err) => {
 			console.error(err);
-			status.current = "failed";
+			setStatus(() => "failed");
 			setTest(() => null);
 			setAnswerState(() => "neutral");
 		});

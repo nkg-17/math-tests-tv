@@ -13,15 +13,15 @@ function TestPage() {
 	return (
 		<>
 			<TestReportErrorModal show={context.isErrorReportOpened} onClose={() => context.setErrorReportOpened(false)} />
-			{ (context.status !== 'ok') && 
-				<div style={{position: "absolute", top: "50vh", left: "50vw"}}>
+			{ (context.status === 'waiting') && 
+				<div style={{position: "absolute", top: "50vh", left: "50vw", transform: "translate(-50%, -50%)"}}>
 					<Loading />
 				</div>
 			}
 			<Container fluid className="mt-auto mb-auto" style={{textAlign: "center"}}>
 				<AnimatePresence>
 					{
-						(context.status === 'ok') && 
+						(context?.test && context.status !== 'waiting') && 
 						<motion.div
 						initial={{ opacity: 0, scale: 0.95 }}
 						animate={{ opacity: 1, scale: 1, transition: { type: "tween" } }}
