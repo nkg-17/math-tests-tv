@@ -3,8 +3,8 @@ import './TestReportErrorModal.css';
 import { useRef, useEffect, useState, useContext } from 'react';
 import { Stack, Modal, Form, Button } from 'react-bootstrap';
 
-import TestsAPI from '../../../api/TestsAPI';
-import TestContext from './TestContext';
+import TestsAPI from '../../../../api/TestsAPI';
+import TestContext from '../TestContext';
 
 
 function TestReportErrorModal(props) {
@@ -28,7 +28,7 @@ function TestReportErrorModal(props) {
 
 			<Modal.Body>
 				<Stack gap={3}>
-					<div>По всем вопросам писать сюда: <b>@xfnty</b> (TG)</div>
+					<div>Если что-то пошло не так, писать сюда: <b>@xfnty</b> (TG)</div>
 
 					<Stack gap={2} className="d-flex flex-row">
 						<a href="https://github.com/nkg-17/math-tests-tv" target="_blank" rel="noreferrer">Проект на GitHub</a>

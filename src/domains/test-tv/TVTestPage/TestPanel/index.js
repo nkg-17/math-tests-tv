@@ -3,9 +3,9 @@ import './TestPanel.css';
 
 import { Stack } from 'react-bootstrap';
 
-import TestHeader from './TestHeader';
-import TestBody from './TestBody';
-import TestFooter from './TestFooter';
+import TestHeader from '../TestHeader';
+import TestBody from '../TestBody';
+import TestFooter from '../TestFooter';
 
 function TestPanel(props) {
 	return (

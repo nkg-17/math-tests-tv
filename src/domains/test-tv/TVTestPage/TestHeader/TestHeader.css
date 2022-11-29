@@ -18,8 +18,3 @@
 .TestHeaderIcon {
 	margin-right: 0.7rem;
 }
-
-.TestHeaderHelp {
-	font-size: 1rem;
-	color: var(--bs-gray-500);
-}

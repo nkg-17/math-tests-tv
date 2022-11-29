@@ -15,20 +15,14 @@ export default function createTestFromDesc(desc) {
 			test.problem.answer.placeholder = desc?.problem?.answer;
 		}
 		else {
-			test.problem.answer.type = MathTest.AnswerType.Choise;
-			test.problem.answer.choises = desc?.problem?.answer;
+			console.error("Unkown answer type for", desc);
 		}
 	}
 
 	test.tips = desc?.problem?.tips;
 
 	test.solution.text = desc?.solution?.text;
-	if (test.problem.answer.type === MathTest.AnswerType.Choise) {
-		test.solution.answer = parseInt(desc?.solution?.answer);
-	}
-	else {
-		test.solution.answer = desc?.solution?.answer;
-	}
+	test.solution.answer = desc?.solution?.answer;
 
 	return test;
 }

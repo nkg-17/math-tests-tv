@@ -4,7 +4,7 @@ import './TestHeader.css';
 import { useContext } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import TestContext from './TestContext';
+import TestContext from '../TestContext';
 
 function TestHeader(props) {
 	const context = useContext(TestContext);
@@ -16,14 +16,6 @@ function TestHeader(props) {
 					<Col className="col-auto TestHeaderTitleText">
 						<i className="TestHeaderIcon bi bi-pencil" />
 						{context.test.title}
-					</Col>
-					<Col className="col-auto">
-						<button 
-						className="btn TestHeaderHelp" 
-						type="button"
-						onClick={() => context.setErrorReportOpened(true)}>
-							<i className="bi bi-exclamation-triangle" />
-						</button>
 					</Col>
 				</Row>
 			</h3>

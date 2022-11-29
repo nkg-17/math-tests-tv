@@ -4,7 +4,7 @@ import './TestBody.css';
 import { useContext } from 'react';
 import { motion } from 'framer-motion';
 
-import TestContext from './TestContext';
+import TestContext from '../TestContext';
 
 
 function TestBody(props) {

@@ -2,9 +2,11 @@
 import './TestSubmitForm.css';
 
 import { useState, useRef, useContext } from 'react';
-import { Col, Stack, Button, Form } from 'react-bootstrap';
+import { Form, Col, Stack, Button } from 'react-bootstrap';
 
-import TestContext from './TestContext';
+// import TouchInputField from '../../../../components/TouchInputField';
+
+import TestContext from '../TestContext';
 
 
 function TestSubmitForm(props) {
@@ -61,6 +63,15 @@ function TestSubmitForm(props) {
 			}
 			<Col className="ms-auto col-auto">
 				<Stack gap={3} className="d-flex flex-row">
+					{/*
+					<TouchInputField
+					ref={textInput}
+					isValid={context.answerState === "valid"}
+					isInvalid={context.answerState === "invalid"}
+					placeholder={props.placeholder}
+					disabled={context.isDoneAnswering} />
+					*/}
+					
 					<Form.Control 
 					ref={textInput}
 					className="TestSubmitFormInput"
@@ -69,6 +80,7 @@ function TestSubmitForm(props) {
 					size="lg"  
 					placeholder={props.placeholder} 
 					type="text" disabled={context.isDoneAnswering}/>
+
 					{context.isDoneAnswering ? nextButton : submitButton}
 				</Stack>
 			</Col>
