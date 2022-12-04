@@ -5,10 +5,12 @@
 
     text-align: left;
 	
+    color: rgba(0, 0, 0, 0.9);
+    font-weight: 400;
 	font-size: 1.3rem;
     line-height: 1.5rem;
     
-    letter-spacing: -.03rem;
+    letter-spacing: -.07rem;
     word-spacing: .3rem;
     
     overflow-y: scroll;
@@ -16,7 +18,7 @@
 }
 
 .TestBody p:first-letter {
-	margin-left: 1em;
+	margin-left: 1.5em;
 }
 
 .TestBodyText {
