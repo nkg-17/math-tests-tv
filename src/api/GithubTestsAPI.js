@@ -1,6 +1,6 @@
 import { Octokit } from "octokit";
-import { validateTest } from '../common/MathTest';
-import createTestFromDesc from './util';
+import { validateTest } from 'common/MathTest';
+import createTestFromDesc from 'api/util';
 
 
 const REPO_NAME = "tv-tests-archive";

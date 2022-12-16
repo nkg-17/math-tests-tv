@@ -1,6 +1,6 @@
 
-import GithubTestsAPI from './GithubTestsAPI';
-import LocalTestsAPI from './LocalTestsAPI';
+import GithubTestsAPI from 	'api/GithubTestsAPI';
+import LocalTestsAPI from 	'api/LocalTestsAPI';
 
 
 export default class TestsAPI {

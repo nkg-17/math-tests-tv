@@ -3,8 +3,8 @@ import './TestReportErrorModal.css';
 import { useRef, useEffect, useState, useContext } from 'react';
 import { Stack, Modal, Form, Button } from 'react-bootstrap';
 
-import TestsAPI from '../../../../api/TestsAPI';
-import TestContext from '../TestContext';
+import TestsAPI from 	'api/TestsAPI';
+import TestContext from 'domains/test-tv/TVTestPage/TestContext';
 
 
 function TestReportErrorModal(props) {

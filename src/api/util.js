@@ -1,4 +1,4 @@
-import { MathTest } from '../common/MathTest'; 
+import { MathTest } from 'common/MathTest'; 
 
 
 export default function createTestFromDesc(desc) {

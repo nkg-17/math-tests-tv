@@ -4,9 +4,7 @@ import './TestSubmitForm.css';
 import { useState, useRef, useContext } from 'react';
 import { Form, Col, Stack, Button } from 'react-bootstrap';
 
-// import TouchInputField from '../../../../components/TouchInputField';
-
-import TestContext from '../TestContext';
+import TestContext from 'domains/test-tv/TVTestPage/TestContext';
 
 
 function TestSubmitForm(props) {
@@ -27,7 +25,6 @@ function TestSubmitForm(props) {
 		<Button 
 		variant="success"
 		type="button" 
-		size="lg"
 		onClick={onSubmit}
 		className="TestSubmitFormButton">
 			Ответить
@@ -39,14 +36,13 @@ function TestSubmitForm(props) {
 		disabled={isNextDisabled}
 		variant="primary"
 		type="button" 
-		size="lg"
 		style={{color: "white"}}
 		onClick={onNext}
 		className="TestSubmitFormButton">
 			Следующая
 		</Button>
 	);
-	
+
 	if (context.isDoneAnswering)
 		textInput.current.value = context.test.solution.answer;
 
@@ -55,9 +51,17 @@ function TestSubmitForm(props) {
 			{
 				(!context.isDoneAnswering) ? (
 					<Col className="col-auto">
-						<Button variant="light" size="lg" onClick={context.openSolution}>
-							<i className="text-muted bi bi-unlock" />
-						</Button>
+						<Stack gap={1} className="flex flex-row">
+							<Button variant="light" onClick={context.openSolution}>
+								<i className="text-muted bi bi-unlock" />
+							</Button>
+							<Button 
+							variant="light"
+							type="button" 
+							onClick={onNext}>
+								<i className="text-muted bi bi-arrow-right" />
+							</Button>
+						</Stack>
 					</Col>
 				) : (<></>)
 			}
@@ -77,7 +81,6 @@ function TestSubmitForm(props) {
 					className="TestSubmitFormInput"
 					isValid={context.answerState === "valid"}
 					isInvalid={context.answerState === "invalid"}
-					size="lg"  
 					placeholder={props.placeholder} 
 					type="text" disabled={context.isDoneAnswering}/>
 

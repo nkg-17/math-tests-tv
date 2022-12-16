@@ -4,11 +4,11 @@ import React, { useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import TestPanel 			from '../TestPanel';
-import TestReportErrorModal from '../TestReportErrorModal';
-import Loading 				from '../../../../components/Loading';
+import TestPanel 			from 'domains/test-tv/TVTestPage/TestPanel';
+import TestReportErrorModal from 'domains/test-tv/TVTestPage/TestReportErrorModal';
+import Loading 				from 'components/Loading';
 
-import TestContext 	from '../TestContext';
+import TestContext 	from 'domains/test-tv/TVTestPage/TestContext';
 
 function TestPage() {
 	const context = useContext(TestContext);

@@ -4,7 +4,7 @@ import './TestHeader.css';
 import { useContext } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import TestContext from '../TestContext';
+import TestContext from 'domains/test-tv/TVTestPage/TestContext';
 
 function TestHeader(props) {
 	const context = useContext(TestContext);

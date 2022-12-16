@@ -1,5 +1,5 @@
-import { validateTest } from '../common/MathTest';
-import createTestFromDesc from './util';
+import { validateTest } from 'common/MathTest';
+import createTestFromDesc from 'api/util';
 
 /*
 	Sometimes you can reach GitHub's request limit 

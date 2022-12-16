@@ -3,11 +3,11 @@ import {
 	useEffect
 } from 'react';
 
-import TestsAPI from '../../../api/TestsAPI';
+import TestsAPI from 'api/TestsAPI';
 
-import TestPage from './TestPage';
+import TestPage from 'domains/test-tv/TVTestPage/TestPage';
 
-import TestContext from './TestContext';
+import TestContext from 'domains/test-tv/TVTestPage/TestContext';
 
 
 export default function TVTestPage(props) {

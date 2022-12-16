@@ -2,9 +2,9 @@
 import { useContext } from 'react';
 import { Row } from 'react-bootstrap';
 
-import TestSubmitForm from './TestSubmitForm';
+import TestSubmitForm from 'domains/test-tv/TVTestPage/TestSubmitForm';
 
-import TestContext from './TestContext';
+import TestContext from 'domains/test-tv/TVTestPage/TestContext';
 
 
 function TestFooter(props) {

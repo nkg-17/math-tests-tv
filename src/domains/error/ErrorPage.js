@@ -4,7 +4,7 @@ import {
 	Container, Alert
 } from 'react-bootstrap';
 
-import RoutePaths from '../../constants/RoutePaths';
+import RoutePaths from 'constants/RoutePaths';
 
 function ErrorPage(props) {
 	return (

@@ -1,17 +1,17 @@
 
 .TestBody {
-    height: 50vh;
-    max-height: 50vh;
+    height: 30vh;
+    max-height: 30vh;
 
     text-align: left;
 	
     color: rgba(0, 0, 0, 0.9);
     font-weight: 400;
-	font-size: 1.3rem;
+	font-size: 1.2rem;
     line-height: 1.5rem;
     
     letter-spacing: -.07rem;
-    word-spacing: .3rem;
+    word-spacing: .2rem;
     
     overflow-y: scroll;
     scrollbar-width: none;
