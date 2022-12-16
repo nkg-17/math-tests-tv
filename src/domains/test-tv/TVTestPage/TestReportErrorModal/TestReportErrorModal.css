@@ -1,5 +1,10 @@
 
 
+.TestReportModal {
+	width: 35rem;
+}
+
+
 .TestReportModalCode {
 	color: #adbac7;
 	background-color: #2d333b;
