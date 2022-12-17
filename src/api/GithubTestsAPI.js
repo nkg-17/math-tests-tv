@@ -24,7 +24,13 @@ export default class GithubTestsAPI {
 
 	static requestIdList() {
 		return this._requestPath("tests").then(
-			(resp) => resp['data'].map((e) => e.name)
+			(resp) => resp['data'].map((e) => e.name).sort((a, b) => {
+				let ai = parseInt(a);
+				let bi = parseInt(b);
+				if (ai < bi) return -1;
+				if (ai > bi) return 1;
+				return 0;
+			})
 		);
 	}
 
