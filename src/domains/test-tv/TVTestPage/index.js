@@ -4,6 +4,7 @@ import {
 } from 'react';
 
 import TestsAPI from 'api/TestsAPI';
+import { checkIsTestAnswerValid } from 'api/util';
 
 import TestPage from 'domains/test-tv/TVTestPage/TestPage';
 
@@ -47,7 +48,7 @@ export default function TVTestPage(props) {
 		isErrorReportOpened: isErrorReportOpened,
 		setErrorReportOpened: setErrorReportOpened,
 
-		submitAnswer: (answer) => setAnswerState(answer === test.solution.answer ? "valid" : "invalid"),
+		submitAnswer: (answer) => setAnswerState(checkIsTestAnswerValid(test, answer) ? "valid" : "invalid"),
 		openSolution: () => setAnswerState("gave-up"),
 		
 		loadPrevTest: () => TestsAPI.requestPrevIdFor(test.id).then((id) => loadTestById(id)),

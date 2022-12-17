@@ -26,3 +26,7 @@ export default function createTestFromDesc(desc) {
 
 	return test;
 }
+
+export function checkIsTestAnswerValid(test, answer) {
+	return test.solution.answer.toLowerCase().replace(',', '.') === answer.toLowerCase().replace(',', '.');
+}
