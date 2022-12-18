@@ -14,7 +14,13 @@ function TestPage() {
 	const context = useContext(TestContext);
 	return (
 		<>
-			<TestReportErrorModal show={context.isErrorReportOpened} onClose={() => context.setErrorReportOpened(false)} />
+			{
+				(process.env.NODE_ENV === "development") ? (
+					<TestReportErrorModal 
+					show={context.isErrorReportOpened} 
+					onClose={() => context.setErrorReportOpened(false)} />
+				) : (<></>)
+			}
 
 			{ (context.status === 'waiting' || context.test === null) && 
 				<div style={{position: "absolute", top: "50vh", left: "50vw", transform: "translate(-50%, -50%)"}}>

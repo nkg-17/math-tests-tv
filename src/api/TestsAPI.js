@@ -33,8 +33,6 @@ export default class TestsAPI {
 	static requestPrevIdFor(testId) { return this._Backend.requestPrevIdFor(testId); }
 }
 
-// TODO: Use .env for that.
-TestsAPI.SetBackend('github');
-
+TestsAPI.SetBackend(process.env.REACT_APP_API_SERVICE);
 // Doesn't account requestPrevIdFor()
-TestsAPI.SetUseRandomInsteadOfNext(true);
+TestsAPI.SetUseRandomInsteadOfNext(process.env.REACT_APP_API_USE_RANDOM_NEXT === "true");
