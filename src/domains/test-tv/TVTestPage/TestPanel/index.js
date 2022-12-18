@@ -9,7 +9,7 @@ import TestFooter from 	'domains/test-tv/TVTestPage/TestFooter';
 
 function TestPanel(props) {
 	return (
-		<Stack className="TestPanel" gap={2}>
+		<Stack className="TestPanel" gap={0}>
 			<TestHeader />
 			<TestBody />
 			<TestFooter align="end" />

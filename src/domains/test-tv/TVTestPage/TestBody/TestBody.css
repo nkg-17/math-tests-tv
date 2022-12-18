@@ -12,6 +12,8 @@
     
     letter-spacing: -.07rem;
     word-spacing: .2rem;
+
+    padding: 7px 0px;
     
     overflow-y: scroll;
     scrollbar-width: none;

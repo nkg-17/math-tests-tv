@@ -1,3 +1,4 @@
+import './index.css';
 
 import { useContext } from 'react';
 import { Row } from 'react-bootstrap';
@@ -11,7 +12,7 @@ function TestFooter(props) {
 	const context = useContext(TestContext);
 
 	return (
-		<Row className="justify-content-between">
+		<Row className="TestFooter justify-content-between">
 			<TestSubmitForm 
 			placeholder={context.test.problem.answer.placeholder} 
 			state="valid" />
