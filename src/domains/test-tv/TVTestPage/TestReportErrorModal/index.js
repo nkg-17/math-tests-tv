@@ -30,7 +30,7 @@ function TestReportErrorModal(props) {
 				<Stack gap={1}>	
 
 					<Alert variant="secondary">
-						Если сайт не работает, напишите сюда: <b>@xfnty</b> (Telegram).
+						Если вы нашли ошибку на сайте, напишите сюда: <b>@xfnty</b> (Telegram).
 					</Alert>
 
 					<Stack gap={2} className="d-flex flex-row">
@@ -45,7 +45,7 @@ function TestReportErrorModal(props) {
 							{JSON.stringify(context.test, null, 2)}
 						</pre>
 					</details>
-					
+
 					<details>
 						<summary>Список ID задач</summary>
 						<pre className="TestReportModalCode mt-1">
