@@ -6,7 +6,7 @@ import createTestFromDesc from 'api/util';
 	so you may use this on instead.
 */
 export default class LocalTestsAPI {
-	static Tests = require("./localTests.json");
+	static Tests = require("./tests.json");
 
 	static init() {
 		for (let i = 0; i < this.Tests.length; i++) {
