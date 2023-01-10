@@ -2,7 +2,7 @@
 import './App.css';
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import RoutePaths from './constants/RoutePaths';
 
@@ -13,8 +13,9 @@ import ErrorPage from 	'./domains/error/ErrorPage';
 export default function App() {
 	return (
 		<div className="App">
-			<Router basename={process.env.PUBLIC_URL}>
+			<Router>
 					<Routes>
+						<Route exact path="/index.html" element={ <Navigate to={RoutePaths.ROOT} /> } />
 						<Route exact path={RoutePaths.ROOT} element={ <Navigate to={RoutePaths.TEST_TV} /> } />
 						<Route exact path={RoutePaths.TEST_TV} element={ <TVTestPage /> } />
 						<Route exact path={RoutePaths.ERROR} element={ <ErrorPage /> } />
